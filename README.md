@@ -1,6 +1,6 @@
 # Bear Near
 
-Data: media.dhb.io/data/bear-near.json
+Data: http://media.dhb.io/data/bear-near.json
 
 ```
 npm install 
