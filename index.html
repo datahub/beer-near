@@ -18,10 +18,70 @@
 </head>
 <body>
     <div class="container">
-        <div id="">
+        <div id="beernear">
+            <div class="beernear--list">
+            </div>
         </div>
     </div>
-    <script type="text/template" id="template--">
+    <script type="text/template" id="template--brewery">
+        <div class="beernear--brewery">
+            <div class="brewery--inner">
+                <h2 class="brewery--name"><%= brewery %></h2>
+                <div class="brewery--logo">
+                    <% if (typeof logoUrl !== 'undefined') { %>
+                        <img class="brewery--image" src="http://media.jrn.com/images/<%= logoUrl %>">
+                    <% } %>
+                </div>
+                <div class="brewery--details">
+                    <% if (typeof type !== 'undefined') { %>
+                    <div class="brewery--item">
+                        <strong>Type:</strong>
+                        <%= type %>
+                    </div>
+                    <% } %>
+                    <% if (typeof location  !== 'undefined') { %>
+                        <div class="brewery--item">
+                            <strong>Address:</strong>
+                             <%= location %>
+                        </div>
+                    <% } %>
+                    <% if (typeof websiteUrl  !== 'undefined') { %>
+                        <div class="brewery--item">
+                            <strong>Website:</strong>
+                            <a class="brewery--link" href="<%= websiteUrl %>"><%= websiteUrl %></a>
+                        </div>
+                    <% } %>
+                    <% if (typeof phone !== 'undefined') { %>
+                        <div class="brewery--item">
+                            <strong>Phone:</strong>
+                            <%= phone %>
+                        </div>
+                    <% } %>
+                </div>
+                <div class="brewery--description">
+                    <% if (typeof description !== 'undefined') { %>
+                        <div class="brewery--item">
+                            <%= description %>
+                        </div>
+                    <% } %>
+                    <% if (typeof taproomHours !== 'undefined') { %>
+                        <div class="brewery--item">
+                            <strong>Hours:</strong>
+                            <%= taproomHours %>
+                        </div>
+                    <% } %>
+                    <% if (typeof tours !== 'undefined' && typeof food !== 'undefined') { %>
+                        <div class="brewery--item">
+                            <strong>Features:</strong>
+                            <% if (typeof tours !== 'undefined' && tours) { %>
+                                <% if (typeof tourInfo !== 'undefined') { print("Tours: " + tourInfo + "<br>") } %>
+                            <% } %>
+                            <% if (typeof food !== 'undefined' && food) { %>Food<% } %>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
     </script>
     <script src="js/bundle.js"></script>
 </body>

@@ -143,8 +143,9 @@ function exportJson() {
   //Logger.log(finalJSON);
   saveToS3(finalJSON);
 
-}
+  createVersion();
 
+}
 
 // push to S3 bucket
 function saveToS3(blob) {
@@ -157,4 +158,49 @@ function saveToS3(blob) {
 
   var s3 = S3.getInstance(awsAccessKey, awsSecretKey);
   s3.putObject(bucket, projectPath, blob, {logRequests:false});
+}
+
+// takes a snapshot of the current sheet and saves it as another sheet
+function createVersion() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+
+  var name = "Published: " + timeStamp();
+
+  var old = ss.getSheetByName(name);
+  if (old) {
+    ss.deleteSheet(old);
+  }
+
+  var sheet = ss.getSheetByName('latest').copyTo(ss);
+  SpreadsheetApp.flush();
+  sheet.setName(name);
+
+}
+// limits the number of snapshots to save
+function limitSheets() {
+  var maxSheetCount = 5;
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheets = ss.getSheets();
+
+  if (sheets.length > maxSheetCount) {
+    for(var i = (maxSheetCount - 1); i < sheets.length; i++){
+      var s = sheets[i];
+      ss.deleteSheet(s);
+    }
+  }
+}
+// returns timestamp in human read-able format
+function timeStamp() {
+  var now = new Date();
+  var date = [ now.getMonth() + 1, now.getDate() ];
+  var time = [ now.getHours(), now.getMinutes()];
+  var suffix = ( time[0] < 12 ) ? "am" : "pm";
+  time[0] = ( time[0] < 12 ) ? time[0] : time[0] - 12;
+  time[0] = time[0] || 12;
+  for ( var i = 1; i < 2; i++ ) {
+    if ( time[i] < 10 ) {
+      time[i] = "0" + time[i];
+    }
+  }
+  return date.join("/") + " at " + time.join(":") + " " + suffix;
 }

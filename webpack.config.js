@@ -13,6 +13,5 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin("./css/styles.css")
-    ],
-    watch: true
+    ]
 }
