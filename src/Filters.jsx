@@ -23,6 +23,13 @@ var ClickableMap = React.createClass({
 });
 
 var Dropdown = React.createClass({
+    getInitialState: function() {
+        return {selected: ""};
+    },
+    handleChange: function(event) {
+        this.setState({selected: event.target.value});
+        this.props.onUpdate({slug:this.props.slug,selected:event.target.value});
+    },
     render: function() {
         var optionNodes = this.props.options.map(function(val, index) {
             return (
@@ -31,7 +38,10 @@ var Dropdown = React.createClass({
         });
         return (
             <div className="beernear--filter">
-                <select name={this.props.name} className="beernear--dropdown pointer">
+                <select
+                    name={this.props.name}
+                    className="beernear--dropdown pointer"
+                    onChange={this.handleChange} >
                     <option value="">Nearby Cities</option>
                     {optionNodes}
                 </select>
@@ -41,10 +51,22 @@ var Dropdown = React.createClass({
 });
 
 var Check = React.createClass({
+    getInitialState: function() {
+        return {toggled: false};
+    },
+    handleChange: function(event) {
+        this.setState({toggled: !this.state.toggled});
+        this.props.onUpdate({slug:this.props.slug,selected:!this.state.toggled});
+    },
     render: function() {
         return (
             <label className="beernear--label pointer">
-                <input type="checkbox" name={this.props.name} className="beernear--checkbox pointer" />
+                <input
+                    type="checkbox"
+                    name={this.props.name}
+                    className="beernear--checkbox pointer"
+                    checked={this.state.toggled}
+                    onChange={this.handleChange} />
                 {this.props.name}
             </label>
         );
@@ -56,15 +78,18 @@ var Filters = React.createClass({
         var filters = this.props.filters;
         return (
             <div className="beernear--filters">
-                <ClickableMap name={filters.regions.name} options={filters.regions.options} />
-                <Dropdown name={filters.cities.name} options={filters.cities.options} />
+                <ClickableMap name={filters.regions.name} options={filters.regions.options} slug="regions" />
+                <Dropdown name={filters.cities.name} options={filters.cities.options} onUpdate={this.onUpdate} slug="cities" />
                 <div className="beernear--filter">
-                    <Check name={filters.tapRoom.name} />
-                    <Check name={filters.food.name} />
-                    <Check name={filters.tours.name} />
+                    <Check name={filters.tapRoom.name} onUpdate={this.onUpdate} slug="tapRoom" />
+                    <Check name={filters.food.name} onUpdate={this.onUpdate} slug="food" />
+                    <Check name={filters.tours.name} onUpdate={this.onUpdate} slug="tours" />
                 </div>
             </div>
         );
+    },
+    onUpdate: function(updatedFilters) {
+        this.props.onUpdate(updatedFilters);
     }
 });
 

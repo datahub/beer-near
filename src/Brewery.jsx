@@ -4,14 +4,14 @@ var Features = React.createClass({
     render: function() {
         if (this.props.tours) {
             if (this.props.tours.toString() === "true") {
-                var tour = <li>Tours available.</li>;
+                var tour = <li>Tours available</li>;
             } else {
                 var tour = <li>{this.props.tourInfo}</li>;
             }
         }
         if (this.props.food) {
             if (this.props.food.toString() === "true") {
-                var food = <li>Food available.</li>;
+                var food = <li>Food available</li>;
             } else {
                 var food = <li>{this.props.food}</li>;
             }
@@ -89,7 +89,7 @@ var Brewery = React.createClass({
                         <div className="brewery--item">
                             <strong>Hours:</strong> {brewery.taproomHours}
                         </div>
-                        <Features food={brewery.food} tour={brewery.tour} tourInfo={brewery.tourInfo} />
+                        <Features food={brewery.food} tours={brewery.tours} tourInfo={brewery.tourInfo} />
                     </div>
                 </div>
             </div>

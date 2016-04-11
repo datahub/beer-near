@@ -3,32 +3,40 @@ require('./styles.scss');
 import $ from "jquery";
 import React from 'react';
 import {render} from 'react-dom';
-import BreweriesList from './BreweriesList.jsx';
+import Breweries from './Breweries.jsx';
 import Filters from './Filters.jsx';
 
 var BeerNear = React.createClass({
     getInitialState: function() {
         return {
-            data: [],
+            allBreweries: [],
+            breweries: [],
             filters: {
                 regions: {
                     name: "Region",
-                    options: ["Northwest", "Northeast", "Central", "East Central", "Southeast", "South Central", "Southwest"]
+                    options: ["Northwest", "Northeast", "Central", "East Central", "Southeast", "South Central", "Southwest"],
+                    selected: ""
                 },
                 cities: {
                     name: "Nearby Cities",
-                    options: ["Appleton", "Door County", "Eagle River", "Eau Claire", "Green Bay", "Hayward", "La Crosse", "Lake Geneva", "Madison", "Milwaukee", "Prairie du Chien", "Sheboygan", "Stevens Point", "Wausau", "Wisconsin Dells", "Wisconsin Rapids"]
+                    options: ["Appleton", "Door County", "Eagle River", "Eau Claire", "Green Bay", "Hayward", "La Crosse", "Lake Geneva", "Madison", "Milwaukee", "Prairie du Chien", "Sheboygan", "Stevens Point", "Wausau", "Wisconsin Dells", "Wisconsin Rapids"],
+                    selected: ""
                 },
-                tours: {name: "Tours"},
-                food: {name: "Food"},
-                tapRoom: {name: "Tap Room"}
+                tours: {name: "Tours", selected: false},
+                food: {name: "Food", selected: false},
+                tapRoom: {name: "Tap Room", selected: false}
             }
         };
+    },
+    filterBreweries: function() {
+        var filteredBreweries = this.applyFilters(this.state.allBreweries, this.state.filters);
+        this.setState({breweries:filteredBreweries});
     },
     loadBreweries: function() {
         $.getJSON(this.props.url, function(data) {
                 var obj = JSON.parse(data);
-                this.setState({data: obj.data});
+                this.setState({allBreweries: obj.data});
+                this.setState({breweries: obj.data});
             }.bind(this)
         );
     },
@@ -38,10 +46,55 @@ var BeerNear = React.createClass({
     render: function() {
         return (
             <div className="BeerNear">
-                <Filters filters={this.state.filters} />
-                <BreweriesList data={this.state.data} />
+                <Filters filters={this.state.filters} onUpdate={this.onUpdate} />
+                <Breweries data={this.state.breweries} />
             </div>
         );
+    },
+    onUpdate: function(updatedFilter) {
+        var newfilters = this.state.filters;
+        newfilters[updatedFilter.slug]['selected'] = updatedFilter.selected;
+        this.setState({filters: newfilters});
+        this.filterBreweries();
+    },
+    applyFilters : function(breweries,filters) {
+        var results = [];
+        var matchingBrewery = function(brewery) {
+            if (filters.tours.selected) {
+                if (!brewery.tours) {
+                    return false;
+                }
+            }
+            if (filters.food.selected) {
+                if (!brewery.food) {
+                    return false;
+                }
+            }
+            if (filters.tapRoom.selected) {
+                if (!brewery.taproom) {
+                    return false;
+                }
+            }
+            /*
+            if (filters.regions.selected && filters.regions.selected !== '') {
+                if (brewery.region !== filters.regions.selected) {
+                    return false;
+                }
+            }
+            */
+            if (filters.cities.selected && filters.cities.selected !== '') {
+                if (brewery.nearestCity === undefined || brewery.nearestCity.indexOf(filters.cities.selected) === -1) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+        results = breweries.filter(matchingBrewery);
+        console.log(results.length);
+        console.log(filters);
+        console.log(results);
+        return results;
     }
 });
 

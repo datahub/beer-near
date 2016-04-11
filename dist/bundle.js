@@ -56,43 +56,51 @@
 	
 	var _reactDom = __webpack_require__(34);
 	
-	var _BreweriesList = __webpack_require__(168);
+	var _Breweries = __webpack_require__(173);
 	
-	var _BreweriesList2 = _interopRequireDefault(_BreweriesList);
+	var _Breweries2 = _interopRequireDefault(_Breweries);
 	
-	var _Filters = __webpack_require__(172);
+	var _Filters = __webpack_require__(170);
 	
 	var _Filters2 = _interopRequireDefault(_Filters);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(170);
+	__webpack_require__(171);
 	
 	var BeerNear = _react2.default.createClass({
 	    displayName: 'BeerNear',
 	
 	    getInitialState: function getInitialState() {
 	        return {
-	            data: [],
+	            allBreweries: [],
+	            breweries: [],
 	            filters: {
 	                regions: {
 	                    name: "Region",
-	                    options: ["Northwest", "Northeast", "Central", "East Central", "Southeast", "South Central", "Southwest"]
+	                    options: ["Northwest", "Northeast", "Central", "East Central", "Southeast", "South Central", "Southwest"],
+	                    selected: ""
 	                },
 	                cities: {
 	                    name: "Nearby Cities",
-	                    options: ["Appleton", "Door County", "Eagle River", "Eau Claire", "Green Bay", "Hayward", "La Crosse", "Lake Geneva", "Madison", "Milwaukee", "Prairie du Chien", "Sheboygan", "Stevens Point", "Wausau", "Wisconsin Dells", "Wisconsin Rapids"]
+	                    options: ["Appleton", "Door County", "Eagle River", "Eau Claire", "Green Bay", "Hayward", "La Crosse", "Lake Geneva", "Madison", "Milwaukee", "Prairie du Chien", "Sheboygan", "Stevens Point", "Wausau", "Wisconsin Dells", "Wisconsin Rapids"],
+	                    selected: ""
 	                },
-	                tours: { name: "Tours" },
-	                food: { name: "Food" },
-	                tapRoom: { name: "Tap Room" }
+	                tours: { name: "Tours", selected: false },
+	                food: { name: "Food", selected: false },
+	                tapRoom: { name: "Tap Room", selected: false }
 	            }
 	        };
+	    },
+	    filterBreweries: function filterBreweries() {
+	        var filteredBreweries = this.applyFilters(this.state.allBreweries, this.state.filters);
+	        this.setState({ breweries: filteredBreweries });
 	    },
 	    loadBreweries: function loadBreweries() {
 	        _jquery2.default.getJSON(this.props.url, function (data) {
 	            var obj = JSON.parse(data);
-	            this.setState({ data: obj.data });
+	            this.setState({ allBreweries: obj.data });
+	            this.setState({ breweries: obj.data });
 	        }.bind(this));
 	    },
 	    componentDidMount: function componentDidMount() {
@@ -102,9 +110,54 @@
 	        return _react2.default.createElement(
 	            'div',
 	            { className: 'BeerNear' },
-	            _react2.default.createElement(_Filters2.default, { filters: this.state.filters }),
-	            _react2.default.createElement(_BreweriesList2.default, { data: this.state.data })
+	            _react2.default.createElement(_Filters2.default, { filters: this.state.filters, onUpdate: this.onUpdate }),
+	            _react2.default.createElement(_Breweries2.default, { data: this.state.breweries })
 	        );
+	    },
+	    onUpdate: function onUpdate(updatedFilter) {
+	        var newfilters = this.state.filters;
+	        newfilters[updatedFilter.slug]['selected'] = updatedFilter.selected;
+	        this.setState({ filters: newfilters });
+	        this.filterBreweries();
+	    },
+	    applyFilters: function applyFilters(breweries, filters) {
+	        var results = [];
+	        var matchingBrewery = function matchingBrewery(brewery) {
+	            if (filters.tours.selected) {
+	                if (!brewery.tours) {
+	                    return false;
+	                }
+	            }
+	            if (filters.food.selected) {
+	                if (!brewery.food) {
+	                    return false;
+	                }
+	            }
+	            if (filters.tapRoom.selected) {
+	                if (!brewery.taproom) {
+	                    return false;
+	                }
+	            }
+	            /*
+	            if (filters.regions.selected && filters.regions.selected !== '') {
+	                if (brewery.region !== filters.regions.selected) {
+	                    return false;
+	                }
+	            }
+	            */
+	            if (filters.cities.selected && filters.cities.selected !== '') {
+	                if (brewery.nearestCity === undefined || brewery.nearestCity.indexOf(filters.cities.selected) === -1) {
+	                    return false;
+	                }
+	            }
+	
+	            return true;
+	        };
+	        results = breweries.filter(matchingBrewery);
+	        console.log(results.length);
+	        console.log(filters);
+	        console.log(results);
+	        return results;
 	    }
 	});
 	
@@ -21720,43 +21773,7 @@
 	module.exports = ReactMount.renderSubtreeIntoContainer;
 
 /***/ },
-/* 168 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Brewery = __webpack_require__(169);
-	
-	var _Brewery2 = _interopRequireDefault(_Brewery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var BreweriesList = _react2.default.createClass({
-	    displayName: 'BreweriesList',
-	
-	    render: function render() {
-	        var breweryNodes = this.props.data.map(function (brewery) {
-	            return _react2.default.createElement(_Brewery2.default, { data: brewery, key: brewery.id });
-	        });
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'beerneer--breweries' },
-	            breweryNodes
-	        );
-	    }
-	});
-	
-	exports.default = BreweriesList;
-
-/***/ },
+/* 168 */,
 /* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -21781,7 +21798,7 @@
 	                var tour = _react2.default.createElement(
 	                    "li",
 	                    null,
-	                    "Tours available."
+	                    "Tours available"
 	                );
 	            } else {
 	                var tour = _react2.default.createElement(
@@ -21796,7 +21813,7 @@
 	                var food = _react2.default.createElement(
 	                    "li",
 	                    null,
-	                    "Food available."
+	                    "Food available"
 	                );
 	            } else {
 	                var food = _react2.default.createElement(
@@ -21948,7 +21965,7 @@
 	                        " ",
 	                        brewery.taproomHours
 	                    ),
-	                    _react2.default.createElement(Features, { food: brewery.food, tour: brewery.tour, tourInfo: brewery.tourInfo })
+	                    _react2.default.createElement(Features, { food: brewery.food, tours: brewery.tours, tourInfo: brewery.tourInfo })
 	                )
 	            )
 	        );
@@ -21959,13 +21976,6 @@
 
 /***/ },
 /* 170 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 171 */,
-/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21994,6 +22004,13 @@
 	var Dropdown = _react2.default.createClass({
 	    displayName: "Dropdown",
 	
+	    getInitialState: function getInitialState() {
+	        return { selected: "" };
+	    },
+	    handleChange: function handleChange(event) {
+	        this.setState({ selected: event.target.value });
+	        this.props.onUpdate({ slug: this.props.slug, selected: event.target.value });
+	    },
 	    render: function render() {
 	        var optionNodes = this.props.options.map(function (val, index) {
 	            return _react2.default.createElement(
@@ -22007,7 +22024,10 @@
 	            { className: "beernear--filter" },
 	            _react2.default.createElement(
 	                "select",
-	                { name: this.props.name, className: "beernear--dropdown pointer" },
+	                {
+	                    name: this.props.name,
+	                    className: "beernear--dropdown pointer",
+	                    onChange: this.handleChange },
 	                _react2.default.createElement(
 	                    "option",
 	                    { value: "" },
@@ -22022,11 +22042,23 @@
 	var Check = _react2.default.createClass({
 	    displayName: "Check",
 	
+	    getInitialState: function getInitialState() {
+	        return { toggled: false };
+	    },
+	    handleChange: function handleChange(event) {
+	        this.setState({ toggled: !this.state.toggled });
+	        this.props.onUpdate({ slug: this.props.slug, selected: !this.state.toggled });
+	    },
 	    render: function render() {
 	        return _react2.default.createElement(
 	            "label",
 	            { className: "beernear--label pointer" },
-	            _react2.default.createElement("input", { type: "checkbox", name: this.props.name, className: "beernear--checkbox pointer" }),
+	            _react2.default.createElement("input", {
+	                type: "checkbox",
+	                name: this.props.name,
+	                className: "beernear--checkbox pointer",
+	                checked: this.state.toggled,
+	                onChange: this.handleChange }),
 	            this.props.name
 	        );
 	    }
@@ -22040,20 +22072,67 @@
 	        return _react2.default.createElement(
 	            "div",
 	            { className: "beernear--filters" },
-	            _react2.default.createElement(ClickableMap, { name: filters.regions.name, options: filters.regions.options }),
-	            _react2.default.createElement(Dropdown, { name: filters.cities.name, options: filters.cities.options }),
+	            _react2.default.createElement(ClickableMap, { name: filters.regions.name, options: filters.regions.options, slug: "regions" }),
+	            _react2.default.createElement(Dropdown, { name: filters.cities.name, options: filters.cities.options, onUpdate: this.onUpdate, slug: "cities" }),
 	            _react2.default.createElement(
 	                "div",
 	                { className: "beernear--filter" },
-	                _react2.default.createElement(Check, { name: filters.tapRoom.name }),
-	                _react2.default.createElement(Check, { name: filters.food.name }),
-	                _react2.default.createElement(Check, { name: filters.tours.name })
+	                _react2.default.createElement(Check, { name: filters.tapRoom.name, onUpdate: this.onUpdate, slug: "tapRoom" }),
+	                _react2.default.createElement(Check, { name: filters.food.name, onUpdate: this.onUpdate, slug: "food" }),
+	                _react2.default.createElement(Check, { name: filters.tours.name, onUpdate: this.onUpdate, slug: "tours" })
 	            )
 	        );
+	    },
+	    onUpdate: function onUpdate(updatedFilters) {
+	        this.props.onUpdate(updatedFilters);
 	    }
 	});
 	
 	exports.default = Filters;
+
+/***/ },
+/* 171 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 172 */,
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Brewery = __webpack_require__(169);
+	
+	var _Brewery2 = _interopRequireDefault(_Brewery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Breweries = _react2.default.createClass({
+	    displayName: 'Breweries',
+	
+	    render: function render() {
+	        var breweryNodes = this.props.data.map(function (brewery) {
+	            return _react2.default.createElement(_Brewery2.default, { data: brewery, key: brewery.id });
+	        });
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'beerneer--breweries' },
+	            breweryNodes
+	        );
+	    }
+	});
+	
+	exports.default = Breweries;
 
 /***/ }
 /******/ ]);

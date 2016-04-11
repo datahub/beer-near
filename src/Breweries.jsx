@@ -1,7 +1,7 @@
 import React from 'react';
 import Brewery from './Brewery.jsx';
 
-var BreweriesList = React.createClass({
+var Breweries = React.createClass({
     render: function() {
         var breweryNodes = this.props.data.map(function(brewery) {
             return (
@@ -16,4 +16,4 @@ var BreweriesList = React.createClass({
     }
 });
 
-export default BreweriesList;
+export default Breweries;
