@@ -75,13 +75,11 @@ var BeerNear = React.createClass({
                     return false;
                 }
             }
-            /*
             if (filters.regions.selected && filters.regions.selected !== '') {
-                if (brewery.region !== filters.regions.selected) {
+                if (brewery.region === undefined || brewery.region !== filters.regions.selected) {
                     return false;
                 }
             }
-            */
             if (filters.cities.selected && filters.cities.selected !== '') {
                 if (brewery.nearestCity === undefined || brewery.nearestCity.indexOf(filters.cities.selected) === -1) {
                     return false;

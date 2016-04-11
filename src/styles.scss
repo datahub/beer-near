@@ -1,4 +1,5 @@
-$green: #005a32;
+$green: #00865F;
+$lightgreen: #00AD83;
 
 .BeerNear {
 
@@ -18,15 +19,19 @@ $green: #005a32;
                 width: 100%;
                 height: auto;
 
-                #SE:hover,
-                #SC:hover,
-                #SW:hover,
-                #EC:hover,
-                #C:hover,
-                #NW:hover,
-                #NE:hover {
-                  fill: $green;
+                .filter--region:hover {
+                    fill: $lightgreen;
                 }
+                .region--selected {
+                    fill: $green;
+                }
+            }
+            .filter--title {
+                margin: 0;
+                padding: 0;
+                font-size: 16px;
+                text-align: center;
+                text-transform: uppercase;
             }
 
             .beernear--dropdown {
@@ -140,6 +145,61 @@ $green: #005a32;
         }
         .beernear--brewery:first-child {
             margin-top: 0;
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .BeerNear {
+        font-size: 14px;
+
+        .beernear--filters {
+            width: 100%;
+            float: none;
+            overflow-y: auto;
+
+            .filter--left {
+                width: 40%;
+                float: left;
+
+            }
+            .filter--right {
+                width: 40%;
+                float: right;
+                margin-top: 60px;
+            }
+            .beernear--filter {
+                .beernear--dropdown {
+                    font-size: 14px;
+                    height: 30px;
+                }
+                .beernear--label,
+                .filter--title {
+                    font-size: 14px;
+                }
+                .beernear--checkbox:before {
+                    top: 1px;
+                    font-size: 18px;
+                }
+            }
+        }
+        .beerneer--breweries {
+            width: 100%;
+            float: none;
+        }
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .BeerNear {
+        .beernear--filters {
+            .filter--left {
+                width: 50%;
+            }
+            .filter--right {
+                width: 48%;
+                margin-top: 30px;
+            }
         }
     }
 }
