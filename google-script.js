@@ -95,6 +95,11 @@ function incompleteSetup() {
 }
 
 function exportJson() {
+
+  var endsWith = function(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+  }
+
   var sheet = SpreadsheetApp.getActiveSheet();
   var rows = sheet.getDataRange();
   var numRows = rows.getNumRows();
@@ -102,12 +107,14 @@ function exportJson() {
   var values = rows.getValues();
 
   var output = [];
-
+  var id = 1;
 
   var header = values[0];
   for (var i = 1; i < numRows; i++) {
     var row = values[i];
-    var tempObj = {}
+    var tempObj = {};
+    tempObj.id = id;
+    id++;
     for (var j = 0;j<numCols;j++) {
       if (row[j]) {
         var val = row[j];
@@ -116,13 +123,22 @@ function exportJson() {
         if (val.toUpperCase() === "YES") {
           val = true;
 
-          //normalize no to false
+        //normalize no to false
         } else if (val.toUpperCase() === "NO") {
           val = false;
 
-          //shorten image urls
-        } else if (val.indexOf('http://media.jrn.com/images/')  > -1){
+        //shorten image urls
+        } else if (val.indexOf('http://media.jrn.com/images/')  > -1) {
           val = val.replace("http://media.jrn.com/images/","");
+
+        // clean up url
+        } else if (val.indexOf('http://') > -1) {
+          val = val.replace("http://","").replace("www.","");
+
+          if (endsWith(val,"/")) {
+            val = val.slice(0, -1);
+          }
+
         }
 
         tempObj[header[j]] = val;
@@ -171,7 +187,7 @@ function createVersion() {
     ss.deleteSheet(old);
   }
 
-  var sheet = ss.getSheetByName('latest').copyTo(ss);
+  var sheet = ss.getActiveSheet().copyTo(ss);
   SpreadsheetApp.flush();
   sheet.setName(name);
 
