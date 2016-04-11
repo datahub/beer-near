@@ -13,7 +13,6 @@ var BeerNear = React.createClass({
         $.getJSON(this.props.url, function(data) {
                 var obj = JSON.parse(data);
                 this.setState({data: obj.data});
-                console.log(obj);
             }.bind(this)
         );
     },

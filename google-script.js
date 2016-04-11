@@ -139,6 +139,9 @@ function exportJson() {
             val = val.slice(0, -1);
           }
 
+        // capitalize type
+        } else if (header[j] === "type") {
+          val = val.charAt(0).toUpperCase() + val.slice(1);
         }
 
         tempObj[header[j]] = val;

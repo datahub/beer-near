@@ -74,7 +74,6 @@
 	        _jquery2.default.getJSON(this.props.url, function (data) {
 	            var obj = JSON.parse(data);
 	            this.setState({ data: obj.data });
-	            console.log(obj);
 	        }.bind(this));
 	    },
 	    componentDidMount: function componentDidMount() {
@@ -21753,18 +21752,98 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var Features = _react2.default.createClass({
+	    displayName: "Features",
+	
+	    render: function render() {
+	        if (this.props.tours) {
+	            if (this.props.tours.toString() === "true") {
+	                var tour = _react2.default.createElement(
+	                    "li",
+	                    null,
+	                    "Tours available."
+	                );
+	            } else {
+	                var tour = _react2.default.createElement(
+	                    "li",
+	                    null,
+	                    this.props.tourInfo
+	                );
+	            }
+	        }
+	        if (this.props.food) {
+	            if (this.props.food.toString() === "true") {
+	                var food = _react2.default.createElement(
+	                    "li",
+	                    null,
+	                    "Food available."
+	                );
+	            } else {
+	                var food = _react2.default.createElement(
+	                    "li",
+	                    null,
+	                    this.props.food
+	                );
+	            }
+	        }
+	        if (food || tour) {
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "brewery--item" },
+	                _react2.default.createElement(
+	                    "strong",
+	                    null,
+	                    "Features"
+	                ),
+	                _react2.default.createElement(
+	                    "ul",
+	                    { className: "brewery--features" },
+	                    tour,
+	                    food
+	                )
+	            );
+	        } else {
+	            return null;
+	        }
+	    }
+	});
+	
+	var Logo = _react2.default.createClass({
+	    displayName: "Logo",
+	
+	    render: function render() {
+	        if (this.props.logoUrl) {
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "brewery--logo" },
+	                _react2.default.createElement("img", { className: "brewery--image", src: "http://media.jrn.com/images/" + this.props.logoUrl })
+	            );
+	        } else {
+	            return null;
+	        }
+	    }
+	});
+	
+	var LinkedAddress = _react2.default.createClass({
+	    displayName: "LinkedAddress",
+	
+	    render: function render() {
+	        var urlRoot = "https://maps.google.com?q=";
+	        var url = urlRoot + encodeURI(this.props.address.replace(/\s/g, '+'));
+	        return _react2.default.createElement(
+	            "a",
+	            { className: "brewery--link", href: url, target: "_blank" },
+	            this.props.address
+	        );
+	    }
+	});
+	
 	var Brewery = _react2.default.createClass({
 	    displayName: "Brewery",
 	
 	    render: function render() {
 	        var brewery = this.props.data;
-	        brewery.features = "";
-	        if (brewery.tours) {
-	            brewery.features = "Tours: " + brewery.tourInfo + _react2.default.createElement("br", null);
-	        }
-	        if (brewery.food) {
-	            brewery.features += brewery.food;
-	        }
+	
 	        return _react2.default.createElement(
 	            "div",
 	            { className: "beernear--brewery" },
@@ -21776,11 +21855,7 @@
 	                    { className: "brewery--name" },
 	                    brewery.brewery
 	                ),
-	                _react2.default.createElement(
-	                    "div",
-	                    { className: "brewery--logo" },
-	                    _react2.default.createElement("img", { className: "brewery--image", src: "http://media.jrn.com/images/" + brewery.logoUrl })
-	                ),
+	                _react2.default.createElement(Logo, { logoUrl: brewery.logoUrl }),
 	                _react2.default.createElement(
 	                    "div",
 	                    { className: "brewery--details" },
@@ -21804,7 +21879,7 @@
 	                            "Address:"
 	                        ),
 	                        " ",
-	                        brewery.location
+	                        _react2.default.createElement(LinkedAddress, { address: brewery.location })
 	                    ),
 	                    _react2.default.createElement(
 	                        "div",
@@ -21814,10 +21889,10 @@
 	                            null,
 	                            "Website:"
 	                        ),
+	                        " ",
 	                        _react2.default.createElement(
 	                            "a",
-	                            { className: "brewery--link", href: "http://www." + brewery.websiteUrl },
-	                            " ",
+	                            { className: "brewery--link", href: "http://www." + brewery.websiteUrl, target: "_blank" },
 	                            brewery.websiteUrl
 	                        )
 	                    ),
@@ -21852,16 +21927,7 @@
 	                        " ",
 	                        brewery.taproomHours
 	                    ),
-	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "brewery--item" },
-	                        _react2.default.createElement(
-	                            "strong",
-	                            null,
-	                            "Features:"
-	                        ),
-	                        brewery.features
-	                    )
+	                    _react2.default.createElement(Features, { food: brewery.food, tour: brewery.tour, tourInfo: brewery.tourInfo })
 	                )
 	            )
 	        );
