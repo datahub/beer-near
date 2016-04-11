@@ -41,7 +41,9 @@ var Logo = React.createClass({
                 </div>
             );
         } else {
-            return null;
+            return (
+                <div className="brewery--logo" />
+            );
         }
     }
 });
@@ -59,6 +61,7 @@ var LinkedAddress = React.createClass({
 var Brewery = React.createClass({
     render: function() {
         var brewery = this.props.data;
+        var linkStyle = {overflow: "hidden", textOverflow: "ellipsis"};
 
         return (
             <div className="beernear--brewery">
@@ -72,7 +75,7 @@ var Brewery = React.createClass({
                         <div className="brewery--item">
                             <strong>Address:</strong> <LinkedAddress address={brewery.location} />
                         </div>
-                        <div className="brewery--item">
+                        <div className="brewery--item" style={linkStyle}>
                             <strong>Website:</strong> <a className="brewery--link" href={"http://www."+brewery.websiteUrl} target="_blank">{brewery.websiteUrl}</a>
                         </div>
                         <div className="brewery--item">

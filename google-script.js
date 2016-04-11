@@ -132,8 +132,8 @@ function exportJson() {
           val = val.replace("http://media.jrn.com/images/","");
 
         // clean up url
-        } else if (val.indexOf('http://') > -1) {
-          val = val.replace("http://","").replace("www.","");
+    } else if (val.indexOf('http://') > -1 || val.indexOf('https://') > -1) {
+          val = val.replace("http://","").replace("https://","").replace("www.","");
 
           if (endsWith(val,"/")) {
             val = val.slice(0, -1);

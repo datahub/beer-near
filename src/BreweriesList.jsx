@@ -9,7 +9,7 @@ var BreweriesList = React.createClass({
             );
         });
         return (
-            <div className="BreweriesList">
+            <div className="beerneer--breweries">
                 {breweryNodes}
             </div>
         );

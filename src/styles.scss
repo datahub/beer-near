@@ -1,62 +1,145 @@
+$green: #005a32;
+
 .BeerNear {
 
-    .beernear--brewery {
-        margin-top: 20px;
-        border: 1px solid #000;
-        box-shadow: 5px 5px 5px #ccc;
+    .pointer:hover {
+        cursor: pointer;
+    }
+
+    .beernear--filters {
+        width: 25%;
+        float: left;
         overflow-y: auto;
 
-        .brewery--inner {
-            margin: 10px;
+        .beernear--filter {
+            margin-bottom: 20px;
 
-            .brewery--name {
+            svg {
                 width: 100%;
-                margin:0;
-                padding:0 0 5px 0;
-                font-size: 16px;
-                color: #444;
-                font-size: 30px;
-                line-height: 1.3;
-                border-bottom: 2px solid #000;
-            }
-            .brewery--logo {
-                float: left;
-                width: 15%;
-                min-height: 1px;
+                height: auto;
 
-                .brewery--image {
+                #SE:hover,
+                #SC:hover,
+                #SW:hover,
+                #EC:hover,
+                #C:hover,
+                #NW:hover,
+                #NE:hover {
+                  fill: $green;
+                }
+            }
+
+            .beernear--dropdown {
+                width: 100%;
+                height: 40px;
+                margin: 0;
+                padding: 0;
+                outline: none;
+                vertical-align: middle;
+                font-size: 20px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #000;
+                background: #e8eeef;
+                border: 1px solid #000;
+            }
+            .beernear--label {
+                display: block;
+                margin:0 0 10px 0;
+                font-size: 18px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            .beernear--checkbox {
+                margin: 0;
+                padding:0 6px 0 0;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                outline: none;
+                background: #fff;
+            }
+            .beernear--checkbox:before {
+                position: relative;
+                top: 2px;
+                padding-right: 3px;
+                content: "\f096";
+                font-family: FontAwesome;
+                font-size: 22px;
+                background: #fff;
+            }
+            .beernear--checkbox:checked:before {
+                padding-right: 0;
+                content: "\f046";
+            }
+        }
+    }
+
+    .beerneer--breweries {
+        width: 73%;
+        float: right;
+        overflow-y: auto;
+
+        .beernear--brewery {
+            margin-top: 20px;
+            border: 1px solid #000;
+            box-shadow: 5px 5px 5px #ccc;
+            overflow-y: auto;
+
+            .brewery--inner {
+                margin: 10px;
+
+                .brewery--name {
                     width: 100%;
-                    margin: 10% 0;
-                    height: auto;
+                    margin:0;
+                    padding:0 0 5px 0;
+                    font-size: 16px;
+                    color: #444;
+                    font-size: 30px;
+                    line-height: 1.3;
+                    border-bottom: 2px solid #000;
                 }
-            }
-            .brewery--details {
-                float: left;
-                width: 35%;
-            }
-            .brewery--description {
-                float: left;
-                width: 50%;
-            }
-            .brewery--item {
-                margin: 15px 10px 0 10px;
+                .brewery--logo {
+                    float: left;
+                    width: 15%;
+                    min-height: 1px;
 
-                .brewery--link {
-                    color: inherit;
-                    text-decoration: none;
+                    .brewery--image {
+                        width: 100%;
+                        margin: 10% 0;
+                        height: auto;
+                    }
                 }
-                .brewery--link:hover {
-                    color: #264896;
-                    text-decoration: underline;
+                .brewery--details {
+                    float: left;
+                    width: 35%;
                 }
-                .brewery--features {
-                    margin: 0;
-                    padding: 0 0 0 20px;
+                .brewery--description {
+                    float: left;
+                    width: 50%;
+                }
+                .brewery--item {
+                    margin: 15px 10px 0 10px;
+
+                    .brewery--link {
+                        color: inherit;
+                        text-decoration: none;
+                    }
+                    .brewery--link:hover {
+                        color: #264896;
+                        text-decoration: underline;
+                    }
+                    .brewery--features {
+                        margin: 0;
+                        padding: 0 0 0 20px;
+                    }
+                }
+                .brewery--item:last-child {
+                    margin-bottom: 15px;
                 }
             }
-            .brewery--item:last-child {
-                margin-bottom: 15px;
-            }
+        }
+        .beernear--brewery:first-child {
+            margin-top: 0;
         }
     }
 }
