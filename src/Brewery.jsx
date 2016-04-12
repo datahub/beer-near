@@ -57,7 +57,11 @@ var LinkedAddress = React.createClass({
             var url = urlRoot + encodeURI(this.props.address.replace(/\s/g, '+'));
             return (
                 <div className="brewery--item">
-                    <i className="fa fa-map-marker" ariaHidden="true"></i><a className="brewery--link" href={url} target="_blank">{this.props.address}</a>
+                    <ul className="fa-ul brewery--features">
+                        <li>
+                            <i className="fa fa-li fa-map-marker" ariaHidden="true"></i><a className="brewery--link" href={url} target="_blank">{this.props.address}</a>
+                        </li>
+                    </ul>
                 </div>
             );
         } else {
@@ -71,7 +75,11 @@ var Taproom = React.createClass({
         if (this.props.taproom && this.props.hours) {
             return (
                 <div className="brewery--item mobile--hidden">
-                    <i className="fa fa-clock-o" ariaHidden="true"></i>{this.props.hours}
+                    <ul className="fa-ul brewery--features">
+                        <li>
+                            <i className="fa fa-li fa-clock-o" ariaHidden="true"></i>{this.props.hours}
+                        </li>
+                    </ul>
                 </div>
                 );
         }else {
@@ -107,7 +115,11 @@ var Phone = React.createClass({
             var number = this.formatPhoneNumber(this.props.number);
             return (
                 <div className="brewery--item">
-                    <a className="brewery--link" href={"tel:"+number}><i className="fa fa-phone" ariaHidden="true"></i></a><a className="brewery--link" href={"tel:"+number}><span className="mobile--hidden">{this.props.number}</span></a>
+                    <ul className="fa-ul brewery--features">
+                        <li>
+                            <a className="brewery--link" href={"tel:"+number}><i className="fa fa-li fa-phone" ariaHidden="true"></i></a><a className="brewery--link" href={"tel:"+number}><span className="mobile--hidden">{this.props.number}</span></a>
+                        </li>
+                    </ul>
                 </div>
                 );
         } else {
@@ -126,8 +138,12 @@ var Website = React.createClass({
             }
             return (
                 <div className="brewery--item" style={linkStyle}>
-                    <a className="brewery--link" href={"http://www."+this.props.url} target="_blank"><i className="fa fa-link" ariaHidden="true"></i></a>
-                    <a className="brewery--link" href={"http://www."+this.props.url} target="_blank"><span className="mobile--hidden">{displayLink}</span></a>
+                    <ul className="fa-ul brewery--features">
+                        <li>
+                            <a className="brewery--link" href={"http://www."+this.props.url} target="_blank"><i className="fa fa-li fa-link" ariaHidden="true"></i></a>
+                            <a className="brewery--link" href={"http://www."+this.props.url} target="_blank"><span className="mobile--hidden">{displayLink}</span></a>
+                        </li>
+                    </ul>
                 </div>
             );
         } else {
@@ -141,7 +157,11 @@ var BreweryType = React.createClass({
         if (this.props.breweryType) {
             return (
                 <div className="brewery--item mobile--hidden">
-                    <i className="fa fa-beer" ariaHidden="true"></i>{this.props.breweryType}
+                    <ul className="fa-ul brewery--features">
+                        <li>
+                            <i className="fa fa-li fa-beer" ariaHidden="true"></i>{this.props.breweryType}
+                        </li>
+                    </ul>
                 </div>
             );
         } else {

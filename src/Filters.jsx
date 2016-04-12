@@ -93,10 +93,26 @@ var Check = React.createClass({
 });
 
 var Filters = React.createClass({
+    getInitialState: function() {
+        return {classes: "beernear--filters"};
+    },
+    toggleFilters: function() {
+        if (this.state.classes === "beernear--filters") {
+            this.setState({classes: "beernear--filters filters--show"});
+        } else {
+            this.setState({classes: "beernear--filters"});
+        }
+    },
+    componentWillMount: function() {
+        window.addEventListener("toggleFilters", this.toggleFilters, false);
+    },
+    componentWillUnmount: function() {
+        window.removeEventListener("toggleFilters", this.toggleFilters, false);
+    },
     render: function() {
         var filters = this.props.filters;
         return (
-            <div className="beernear--filters">
+            <div className={this.state.classes}>
                 <ClickableMap
                     name={filters.regions.name}
                     options={filters.regions.options}
@@ -125,6 +141,9 @@ var Filters = React.createClass({
                             slug="tours"
                             iconClasses="fa-map-signs" />
                     </div>
+                </div>
+                <div className="filters--apply" onClick={this.toggleFilters}>
+                    Apply
                 </div>
             </div>
         );

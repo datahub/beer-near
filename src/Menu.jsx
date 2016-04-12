@@ -2,8 +2,11 @@ import React from 'react';
 
 var Menu = React.createClass({
     handleClick: function() {
-        // TODO: connect button
-        // should toggle .filters--show on .beernear--filters
+        window.dispatchEvent(window.toggleFilters);
+    },
+    componentDidMount() {
+        window.toggleFilters = document.createEvent('Event');
+        window.toggleFilters.initEvent('toggleFilters', true, true);
     },
     render: function() {
         return (
