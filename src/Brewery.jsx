@@ -4,22 +4,22 @@ var Features = React.createClass({
     render: function() {
         if (this.props.tours) {
             if (this.props.tours.toString() === "true") {
-                var tour = <li><i className="fa-li fa fa-map-signs" ariaHidden="true"></i>Tours available</li>;
+                var tour = <li><i className="fa-li fa fa-map-signs" ariaHidden="true"></i><span className="mobile--hidden">Tours available</span></li>;
             } else {
-                var tour = <li><i className="fa-li fa fa-map-signs" ariaHidden="true"></i>{this.props.tourInfo}</li>;
+                var tour = <li><i className="fa-li fa fa-map-signs" ariaHidden="true"></i><span className="mobile--hidden">{this.props.tourInfo}</span></li>;
             }
         }
         if (this.props.food) {
             if (this.props.food.toString() === "true") {
-                var food = <li><i className="fa-li fa fa-cutlery" ariaHidden="true"></i>Food available</li>;
+                var food = <li><i className="fa-li fa fa-cutlery" ariaHidden="true"></i><span className="mobile--hidden">Food available</span></li>;
             } else {
-                var food = <li><i className="fa-li fa fa-cutlery" ariaHidden="true"></i>{this.props.food}</li>;
+                var food = <li><i className="fa-li fa fa-cutlery" ariaHidden="true"></i><span className="mobile--hidden">{this.props.food}</span></li>;
             }
         }
         if (food || tour) {
             return (
                 <div className="brewery--item">
-                    <strong>Features</strong>
+                    <strong><span className="mobile--hidden">Features</span></strong>
                     <ul className="fa-ul brewery--features">
                         {tour}
                         {food}
@@ -42,7 +42,9 @@ var Logo = React.createClass({
             );
         } else {
             return (
-                <div className="brewery--logo" />
+                <div className="brewery--logo logo--empty">
+                    <i className="fa fa-beer" ariaHidden="true"></i>
+                </div>
             );
         }
     }
@@ -68,7 +70,7 @@ var Taproom = React.createClass({
     render: function() {
         if (this.props.taproom && this.props.hours) {
             return (
-                <div className="brewery--item">
+                <div className="brewery--item mobile--hidden">
                     <i className="fa fa-clock-o" ariaHidden="true"></i>{this.props.hours}
                 </div>
                 );
@@ -82,7 +84,7 @@ var Description = React.createClass({
     render: function() {
         if (this.props.description) {
             return (
-                <div className="brewery--item">
+                <div className="brewery--item mobile--hidden">
                     {this.props.description}
                 </div>
                 );
@@ -105,7 +107,7 @@ var Phone = React.createClass({
             var number = this.formatPhoneNumber(this.props.number);
             return (
                 <div className="brewery--item">
-                    <i className="fa fa-phone" ariaHidden="true"></i><a className="brewery--link" href={"tel:"+number}>{this.props.number}</a>
+                    <a className="brewery--link" href={"tel:"+number}><i className="fa fa-phone" ariaHidden="true"></i></a><a className="brewery--link" href={"tel:"+number}><span className="mobile--hidden">{this.props.number}</span></a>
                 </div>
                 );
         } else {
@@ -124,7 +126,8 @@ var Website = React.createClass({
             }
             return (
                 <div className="brewery--item" style={linkStyle}>
-                    <i className="fa fa-link" ariaHidden="true"></i><a className="brewery--link" href={"http://www."+this.props.url} target="_blank">{displayLink}</a>
+                    <a className="brewery--link" href={"http://www."+this.props.url} target="_blank"><i className="fa fa-link" ariaHidden="true"></i></a>
+                    <a className="brewery--link" href={"http://www."+this.props.url} target="_blank"><span className="mobile--hidden">{displayLink}</span></a>
                 </div>
             );
         } else {
@@ -137,7 +140,7 @@ var BreweryType = React.createClass({
     render: function() {
         if (this.props.breweryType) {
             return (
-                <div className="brewery--item">
+                <div className="brewery--item mobile--hidden">
                     <i className="fa fa-beer" ariaHidden="true"></i>{this.props.breweryType}
                 </div>
             );

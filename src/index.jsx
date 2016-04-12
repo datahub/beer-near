@@ -5,6 +5,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import Breweries from './Breweries.jsx';
 import Filters from './Filters.jsx';
+import Menu from './Menu.jsx';
 
 var BeerNear = React.createClass({
     getInitialState: function() {
@@ -33,6 +34,7 @@ var BeerNear = React.createClass({
         this.setState({breweries:filteredBreweries});
     },
     loadBreweries: function() {
+        // needs some local storage caching so that this can be used offline
         $.getJSON(this.props.url, function(data) {
                 var obj = JSON.parse(data);
                 this.setState({allBreweries: obj.data});
@@ -46,6 +48,7 @@ var BeerNear = React.createClass({
     render: function() {
         return (
             <div className="BeerNear">
+                <Menu />
                 <Filters filters={this.state.filters} onUpdate={this.onUpdate} />
                 <Breweries data={this.state.breweries} />
             </div>
