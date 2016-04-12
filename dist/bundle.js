@@ -21832,12 +21832,14 @@
 	                var tour = _react2.default.createElement(
 	                    "li",
 	                    null,
+	                    _react2.default.createElement("i", { className: "fa-li fa fa-map-signs", ariaHidden: "true" }),
 	                    "Tours available"
 	                );
 	            } else {
 	                var tour = _react2.default.createElement(
 	                    "li",
 	                    null,
+	                    _react2.default.createElement("i", { className: "fa-li fa fa-map-signs", ariaHidden: "true" }),
 	                    this.props.tourInfo
 	                );
 	            }
@@ -21847,12 +21849,14 @@
 	                var food = _react2.default.createElement(
 	                    "li",
 	                    null,
+	                    _react2.default.createElement("i", { className: "fa-li fa fa-cutlery", ariaHidden: "true" }),
 	                    "Food available"
 	                );
 	            } else {
 	                var food = _react2.default.createElement(
 	                    "li",
 	                    null,
+	                    _react2.default.createElement("i", { className: "fa-li fa fa-cutlery", ariaHidden: "true" }),
 	                    this.props.food
 	                );
 	            }
@@ -21868,7 +21872,7 @@
 	                ),
 	                _react2.default.createElement(
 	                    "ul",
-	                    { className: "brewery--features" },
+	                    { className: "fa-ul brewery--features" },
 	                    tour,
 	                    food
 	                )
@@ -21899,13 +21903,127 @@
 	    displayName: "LinkedAddress",
 	
 	    render: function render() {
-	        var urlRoot = "https://maps.google.com?q=";
-	        var url = urlRoot + encodeURI(this.props.address.replace(/\s/g, '+'));
-	        return _react2.default.createElement(
-	            "a",
-	            { className: "brewery--link", href: url, target: "_blank" },
-	            this.props.address
-	        );
+	        if (this.props.address) {
+	            var urlRoot = "https://maps.google.com?q=";
+	            var url = urlRoot + encodeURI(this.props.address.replace(/\s/g, '+'));
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "brewery--item" },
+	                _react2.default.createElement("i", { className: "fa fa-map-marker", ariaHidden: "true" }),
+	                _react2.default.createElement(
+	                    "a",
+	                    { className: "brewery--link", href: url, target: "_blank" },
+	                    this.props.address
+	                )
+	            );
+	        } else {
+	            return null;
+	        }
+	    }
+	});
+	
+	var Taproom = _react2.default.createClass({
+	    displayName: "Taproom",
+	
+	    render: function render() {
+	        if (this.props.taproom && this.props.hours) {
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "brewery--item" },
+	                _react2.default.createElement("i", { className: "fa fa-clock-o", ariaHidden: "true" }),
+	                this.props.hours
+	            );
+	        } else {
+	            return null;
+	        }
+	    }
+	});
+	
+	var Description = _react2.default.createClass({
+	    displayName: "Description",
+	
+	    render: function render() {
+	        if (this.props.description) {
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "brewery--item" },
+	                this.props.description
+	            );
+	        } else {
+	            return null;
+	        }
+	    }
+	});
+	
+	var Phone = _react2.default.createClass({
+	    displayName: "Phone",
+	
+	    formatPhoneNumber: function formatPhoneNumber(number) {
+	        var num = number.replace(/\D/g, '');
+	        if (num.length === 10) {
+	            num = "+1" + num;
+	        }
+	        return num;
+	    },
+	    render: function render() {
+	        if (this.props.number) {
+	            var number = this.formatPhoneNumber(this.props.number);
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "brewery--item" },
+	                _react2.default.createElement("i", { className: "fa fa-phone", ariaHidden: "true" }),
+	                _react2.default.createElement(
+	                    "a",
+	                    { className: "brewery--link", href: "tel:" + number },
+	                    this.props.number
+	                )
+	            );
+	        } else {
+	            return null;
+	        }
+	    }
+	});
+	
+	var Website = _react2.default.createClass({
+	    displayName: "Website",
+	
+	    render: function render() {
+	        if (this.props.url) {
+	            var linkStyle = { overflow: "hidden", textOverflow: "ellipsis" };
+	            var displayLink = this.props.url;
+	            if (this.props.url.indexOf('facebook.com') > -1) {
+	                displayLink = "Facebook";
+	            }
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "brewery--item", style: linkStyle },
+	                _react2.default.createElement("i", { className: "fa fa-link", ariaHidden: "true" }),
+	                _react2.default.createElement(
+	                    "a",
+	                    { className: "brewery--link", href: "http://www." + this.props.url, target: "_blank" },
+	                    displayLink
+	                )
+	            );
+	        } else {
+	            return null;
+	        }
+	    }
+	});
+	
+	var BreweryType = _react2.default.createClass({
+	    displayName: "BreweryType",
+	
+	    render: function render() {
+	        if (this.props.breweryType) {
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "brewery--item" },
+	                _react2.default.createElement("i", { className: "fa fa-beer", ariaHidden: "true" }),
+	                this.props.breweryType
+	            );
+	        } else {
+	            return null;
+	        }
 	    }
 	});
 	
@@ -21914,8 +22032,6 @@
 	
 	    render: function render() {
 	        var brewery = this.props.data;
-	        var linkStyle = { overflow: "hidden", textOverflow: "ellipsis" };
-	
 	        return _react2.default.createElement(
 	            "div",
 	            { className: "beernear--brewery" },
@@ -21931,74 +22047,16 @@
 	                _react2.default.createElement(
 	                    "div",
 	                    { className: "brewery--details" },
-	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "brewery--item" },
-	                        _react2.default.createElement(
-	                            "strong",
-	                            null,
-	                            "Type:"
-	                        ),
-	                        " ",
-	                        brewery.type
-	                    ),
-	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "brewery--item" },
-	                        _react2.default.createElement(
-	                            "strong",
-	                            null,
-	                            "Address:"
-	                        ),
-	                        " ",
-	                        _react2.default.createElement(LinkedAddress, { address: brewery.location })
-	                    ),
-	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "brewery--item", style: linkStyle },
-	                        _react2.default.createElement(
-	                            "strong",
-	                            null,
-	                            "Website:"
-	                        ),
-	                        " ",
-	                        _react2.default.createElement(
-	                            "a",
-	                            { className: "brewery--link", href: "http://www." + brewery.websiteUrl, target: "_blank" },
-	                            brewery.websiteUrl
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "brewery--item" },
-	                        _react2.default.createElement(
-	                            "strong",
-	                            null,
-	                            "Phone:"
-	                        ),
-	                        " ",
-	                        brewery.phone
-	                    )
+	                    _react2.default.createElement(BreweryType, { breweryType: brewery.type }),
+	                    _react2.default.createElement(LinkedAddress, { address: brewery.location }),
+	                    _react2.default.createElement(Website, { url: brewery.websiteUrl }),
+	                    _react2.default.createElement(Phone, { number: brewery.phone })
 	                ),
 	                _react2.default.createElement(
 	                    "div",
 	                    { className: "brewery--description" },
-	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "brewery--item" },
-	                        brewery.description
-	                    ),
-	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "brewery--item" },
-	                        _react2.default.createElement(
-	                            "strong",
-	                            null,
-	                            "Hours:"
-	                        ),
-	                        " ",
-	                        brewery.taproomHours
-	                    ),
+	                    _react2.default.createElement(Description, { desc: brewery.description }),
+	                    _react2.default.createElement(Taproom, { taproom: brewery.taproom, hours: brewery.taproomHours }),
 	                    _react2.default.createElement(Features, { food: brewery.food, tours: brewery.tours, tourInfo: brewery.tourInfo })
 	                )
 	            )
@@ -22054,6 +22112,7 @@
 	            _react2.default.createElement(
 	                'h3',
 	                { className: 'filter--title' },
+	                _react2.default.createElement('i', { className: 'fa fa-map-marker fa-lg', ariaHidden: 'true' }),
 	                'Select a Region'
 	            ),
 	            _react2.default.createElement(
@@ -22130,6 +22189,7 @@
 	                className: 'beernear--checkbox pointer',
 	                checked: this.state.toggled,
 	                onChange: this.handleChange }),
+	            _react2.default.createElement('i', { className: "fa fa-fw " + this.props.iconClasses, ariaHidden: 'true' }),
 	            this.props.name
 	        );
 	    }
@@ -22162,15 +22222,18 @@
 	                    _react2.default.createElement(Check, {
 	                        name: filters.tapRoom.name,
 	                        onUpdate: this.onUpdate,
-	                        slug: 'tapRoom' }),
+	                        slug: 'tapRoom',
+	                        iconClasses: 'fa-beer' }),
 	                    _react2.default.createElement(Check, {
 	                        name: filters.food.name,
 	                        onUpdate: this.onUpdate,
-	                        slug: 'food' }),
+	                        slug: 'food',
+	                        iconClasses: 'fa-cutlery' }),
 	                    _react2.default.createElement(Check, {
 	                        name: filters.tours.name,
 	                        onUpdate: this.onUpdate,
-	                        slug: 'tours' })
+	                        slug: 'tours',
+	                        iconClasses: 'fa-map-signs' })
 	                )
 	            )
 	        );
