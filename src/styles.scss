@@ -72,7 +72,7 @@ $lightgreen: #00AD83;
             .beernear--checkbox {
                 display: inline-block;
                 margin: 0;
-                padding:0 6px 0 0;
+                padding:0 6px 0 1px;
                 outline: none;
                 background: #fff;
                 border: 0;
@@ -94,18 +94,86 @@ $lightgreen: #00AD83;
                 content: "\f046";
             }
         }
+        .filters--header {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0 20px 0;
+        }
+        .filters--break {
+            border-top: 1px solid #000;
+            margin-bottom: 11px;
+            text-align: center;
+
+            .filters--or {
+                font-size: 16px;
+                line-height: 16px;
+                position: relative;
+                top: -9px;
+                background: #fff;
+                padding: 0 5px;
+            }
+        }
         .filters--apply {
             display: none;
         }
+
+        i.fa {
+            margin-right: 6px;
+            font-size: 18px;
+            color: #333;
+        }
     }
 
-    .beerneer--breweries {
+    .beernear--breweries {
         width: 73%;
         float: right;
         overflow-y: auto;
 
+        .breweries--header {
+            margin: 5px 0 0 0;
+            padding: 0;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .breweries--tagline {
+            margin: 0 0 20px 0;
+            padding: 0;
+            font-size: 14px;
+            line-height: 1.2;
+            color: #777;
+            .fa {
+                display: none;
+            }
+            .tagline--more {
+                color: #222;
+
+                .tagline--link {
+                    color: #264896;
+                    text-decoration: none;
+                }
+                .tagline--link:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+        .breweries--results {
+            border-top: 1px solid #000;
+            text-align: center;
+            margin-bottom: 5px;
+
+            .breweries--count {
+                font-size: 16px;
+                line-height: 16px;
+                position: relative;
+                top: -9px;
+                background: #fff;
+                padding: 0 5px;
+            }
+        }
+
         .beernear--brewery {
-            margin-top: 20px;
+            margin-bottom: 20px;
             border: 1px solid #000;
             box-shadow: 5px 5px 5px #ccc;
             overflow-y: auto;
@@ -164,24 +232,22 @@ $lightgreen: #00AD83;
                         color: #264896;
                         text-decoration: underline;
                     }
-                    .brewery--features {
+                    .brewery--list {
                         margin: 0;
-                        padding: 0 0 0 25px;
+                        padding: 0 0 0 30px;
                     }
                 }
                 .brewery--item:last-child {
                     margin-bottom: 15px;
                 }
             }
-        }
-        .beernear--brewery:first-child {
-            margin-top: 0;
+            .mobile--info {
+                display: none;
+            }
         }
     }
-
     i.fa {
         font-size: 18px;
-        margin-right: 6px;
         color: #333;
     }
 }
@@ -194,6 +260,10 @@ $lightgreen: #00AD83;
             width: 100%;
             float: none;
             overflow-y: auto;
+
+            .filters--break {
+                display: none;
+            }
 
             .filter--left {
                 width: 40%;
@@ -220,7 +290,7 @@ $lightgreen: #00AD83;
                 }
             }
         }
-        .beerneer--breweries {
+        .beernear--breweries {
             width: 100%;
             float: none;
         }
@@ -236,6 +306,7 @@ $lightgreen: #00AD83;
             top: 0;
             left: 0;
             right: 0;
+            height: 48px;
             background: #fff;
             z-index: 2;
             text-align: center;
@@ -277,9 +348,13 @@ $lightgreen: #00AD83;
             height: 100%;
             background: rgba(255,255,255,.96);
             z-index: 1;
-            padding-top: 25%;
+            padding-top: 54px;
             transform: translateY(-100%);
             transition: transform .3s ease-in-out;
+
+            .filters--header {
+                margin-bottom: 15px;
+            }
 
             .filter--left {
                 width: 180px;
@@ -293,10 +368,15 @@ $lightgreen: #00AD83;
             .filter--right {
                 width: 150px;
                 float: none;
-                margin: 20px auto;
+                margin: 5px auto 20px auto;
             }
             .beernear--dropdown {
                 font-size: 16px;
+            }
+            .filters--break {
+                display: block;
+                width: 170px;
+                margin: 20px auto 0 auto;
             }
             .filters--apply {
                 display: block;
@@ -315,9 +395,26 @@ $lightgreen: #00AD83;
         .beernear--filters.filters--show {
             transform: translateY(0);
         }
-        .beerneer--breweries {
+        .beernear--breweries {
             padding-top: 49px;
 
+            .breweries--tagline {
+                line-height: 14px;
+                .fa {
+                    display: inline-block;
+                    padding: 0 5px;
+                    font-size: 12px;
+                    line-height: inherit;
+                    color: inherit;
+                }
+                .tagline--more {
+                    display: none;
+                }
+                .tagline--more.tagline--show {
+                    display: inline;
+
+                }
+            }
             .beernear--brewery {
                 .brewery--inner {
                     .brewery--name {
@@ -334,23 +431,48 @@ $lightgreen: #00AD83;
                         }
                     }
                     .brewery--details {
+                        display: inline-block;
                         float: none;
                         width: initial;
-                        margin-left: 30%;
+                        margin-left: 8px;
+                        margin-top: 5px;
                     }
                     .brewery--description {
-                        float: right;
-                        width: 20%;
-                        overflow-y: auto;
+                        display: inline-block;
+                        float: none;
+                        width: initial;
+                        margin-top: 5px;
                     }
                     .brewery--item {
                         display: inline;
-                        margin-left: 0;
-                        margin-right: 0;
+                        margin: 0;
+                        .fa-ul {
+                            display: inline;
+                            margin: 0;
+                            padding: 0;
+                            li {
+                                display: inline;
+                                .fa-li {
+                                    position: initial;
+                                    width: initial;
+                                    padding-left: 15px;
+                                }
+                                .fa-map-marker {
+                                    padding-left: 0;
+                                    padding-right: 5px;
+                                }
+                            }
+                        }
+                    }
+                    .brewery--item:last-child {
+                        margin: 0;
                     }
                     .mobile--hidden {
                         display: none;
                     }
+                }
+                .mobile-info {
+                    display: inline-block;
                 }
             }
         }

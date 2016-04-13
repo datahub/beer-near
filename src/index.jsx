@@ -34,7 +34,7 @@ var BeerNear = React.createClass({
         this.setState({breweries:filteredBreweries});
     },
     loadBreweries: function() {
-        // needs some local storage caching so that this can be used offline
+        // TODO: enable offline support, needs to local storage caching
         $.getJSON(this.props.url, function(data) {
                 var obj = JSON.parse(data);
                 this.setState({allBreweries: obj.data});
@@ -44,15 +44,6 @@ var BeerNear = React.createClass({
     },
     componentDidMount: function() {
         this.loadBreweries();
-    },
-    render: function() {
-        return (
-            <div className="BeerNear">
-                <Menu />
-                <Filters filters={this.state.filters} onUpdate={this.onUpdate} />
-                <Breweries data={this.state.breweries} />
-            </div>
-        );
     },
     onUpdate: function(updatedFilter) {
         var newfilters = this.state.filters;
@@ -92,10 +83,16 @@ var BeerNear = React.createClass({
             return true;
         };
         results = breweries.filter(matchingBrewery);
-        console.log(results.length);
-        console.log(filters);
-        console.log(results);
         return results;
+    },
+    render: function() {
+        return (
+            <div className="BeerNear">
+                <Menu />
+                <Filters filters={this.state.filters} onUpdate={this.onUpdate} />
+                <Breweries data={this.state.breweries} />
+            </div>
+        );
     }
 });
 

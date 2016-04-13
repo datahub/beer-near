@@ -113,11 +113,13 @@ var Filters = React.createClass({
         var filters = this.props.filters;
         return (
             <div className={this.state.classes}>
+                <div className="filters--header">Filter Breweries</div>
                 <ClickableMap
                     name={filters.regions.name}
                     options={filters.regions.options}
                     slug="regions"
                     onUpdate={this.onUpdate} />
+                <div className="filters--break"><span className="filters--or">OR</span></div>
                 <div className="filter--right">
                     <Dropdown
                         name={filters.cities.name}

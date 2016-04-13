@@ -11,7 +11,9 @@ var Menu = React.createClass({
     render: function() {
         return (
             <div className="beernear--menu">
-                <img className="menu--logo" src="http://media.jrn.com/designimages/tap-graytag-500w.png" />
+                <a href="http://www.jsonline.com/entertainment">
+                    <img className="menu--logo" src="http://media.jrn.com/designimages/tap-graytag-500w.png" />
+                </a>
                 <div className="menu--right" onClick={this.handleClick}>
                     <i className="fa fa-sliders menu--filters" ariaHidden="true"></i>
                 </div>

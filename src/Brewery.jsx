@@ -19,8 +19,7 @@ var Features = React.createClass({
         if (food || tour) {
             return (
                 <div className="brewery--item">
-                    <strong><span className="mobile--hidden">Features</span></strong>
-                    <ul className="fa-ul brewery--features">
+                    <ul className="fa-ul brewery--list">
                         {tour}
                         {food}
                     </ul>
@@ -55,11 +54,21 @@ var LinkedAddress = React.createClass({
         if (this.props.address) {
             var urlRoot = "https://maps.google.com?q=";
             var url = urlRoot + encodeURI(this.props.address.replace(/\s/g, '+'));
+            var firstComma = this.props.address.lastIndexOf(",");
+            var secondComma = this.props.address.lastIndexOf(",",(firstComma-1));
+            var before = this.props.address.substring(0,(firstComma+1));
+            var city = this.props.address.substring((secondComma+1),firstComma);
+            var after = this.props.address.substring(secondComma,(this.props.address.length-1));
+            var addressNode = (
+                <span>
+                    <span className="mobile--hidden">{before}</span>{city}<span className="mobile--hidden">{after}</span>
+                </span>
+            );
             return (
                 <div className="brewery--item">
-                    <ul className="fa-ul brewery--features">
+                    <ul className="fa-ul brewery--list">
                         <li>
-                            <i className="fa fa-li fa-map-marker" ariaHidden="true"></i><a className="brewery--link" href={url} target="_blank">{this.props.address}</a>
+                            <i className="fa fa-li fa-map-marker" ariaHidden="true"></i><a className="brewery--link" href={url} target="_blank">{addressNode}</a>
                         </li>
                     </ul>
                 </div>
@@ -75,7 +84,7 @@ var Taproom = React.createClass({
         if (this.props.taproom && this.props.hours) {
             return (
                 <div className="brewery--item mobile--hidden">
-                    <ul className="fa-ul brewery--features">
+                    <ul className="fa-ul brewery--list">
                         <li>
                             <i className="fa fa-li fa-clock-o" ariaHidden="true"></i>{this.props.hours}
                         </li>
@@ -90,10 +99,14 @@ var Taproom = React.createClass({
 
 var Description = React.createClass({
     render: function() {
-        if (this.props.description) {
+        if (this.props.desc) {
             return (
                 <div className="brewery--item mobile--hidden">
-                    {this.props.description}
+                    <ul className="fa-ul brewery--list">
+                        <li>
+                            <i className="fa fa-li fa-info-circle" ariaHidden="true"></i>{this.props.desc}
+                        </li>
+                    </ul>
                 </div>
                 );
         } else {
@@ -115,7 +128,7 @@ var Phone = React.createClass({
             var number = this.formatPhoneNumber(this.props.number);
             return (
                 <div className="brewery--item">
-                    <ul className="fa-ul brewery--features">
+                    <ul className="fa-ul brewery--list">
                         <li>
                             <a className="brewery--link" href={"tel:"+number}><i className="fa fa-li fa-phone" ariaHidden="true"></i></a><a className="brewery--link" href={"tel:"+number}><span className="mobile--hidden">{this.props.number}</span></a>
                         </li>
@@ -138,7 +151,7 @@ var Website = React.createClass({
             }
             return (
                 <div className="brewery--item" style={linkStyle}>
-                    <ul className="fa-ul brewery--features">
+                    <ul className="fa-ul brewery--list">
                         <li>
                             <a className="brewery--link" href={"http://www."+this.props.url} target="_blank"><i className="fa fa-li fa-link" ariaHidden="true"></i></a>
                             <a className="brewery--link" href={"http://www."+this.props.url} target="_blank"><span className="mobile--hidden">{displayLink}</span></a>
@@ -157,7 +170,7 @@ var BreweryType = React.createClass({
         if (this.props.breweryType) {
             return (
                 <div className="brewery--item mobile--hidden">
-                    <ul className="fa-ul brewery--features">
+                    <ul className="fa-ul brewery--list">
                         <li>
                             <i className="fa fa-li fa-beer" ariaHidden="true"></i>{this.props.breweryType}
                         </li>
@@ -171,24 +184,35 @@ var BreweryType = React.createClass({
 });
 
 var Brewery = React.createClass({
+    getInitialState: function() {
+        return {classes: "beernear--brewery"};
+    },
+    handleClick: function() {
+        if (this.state.classes === "beernear--brewery") {
+            this.setState({classes: "beernear--brewery brewery--show"});
+        } else {
+            this.setState({classes: "beernear--brewery"});
+        }
+    },
     render: function() {
         var brewery = this.props.data;
         return (
-            <div className="beernear--brewery">
+            <div className={this.state.classes}>
                 <div className="brewery--inner">
                     <h2 className="brewery--name">{brewery.brewery}</h2>
                     <Logo logoUrl={brewery.logoUrl} />
                     <div className="brewery--details">
                         <BreweryType breweryType={brewery.type} />
                         <LinkedAddress address={brewery.location} />
-                        <Website url={brewery.websiteUrl} />
                         <Phone number={brewery.phone} />
+                        <Website url={brewery.websiteUrl} />
                     </div>
                     <div className="brewery--description">
-                        <Description desc={brewery.description}/>
+                        <Description desc={brewery.description} />
                         <Taproom taproom={brewery.taproom} hours={brewery.taproomHours} />
                         <Features food={brewery.food} tours={brewery.tours} tourInfo={brewery.tourInfo} />
                     </div>
+                    <i className="fa fa-li fa-info-circle mobile--info" ariaHidden="true" onClick={this.handleClick}></i>
                 </div>
             </div>
         );
