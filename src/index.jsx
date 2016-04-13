@@ -87,7 +87,7 @@ var BeerNear = React.createClass({
     },
     render: function() {
         return (
-            <div className="BeerNear">
+            <div id="BeerNear">
                 <Menu />
                 <Filters filters={this.state.filters} onUpdate={this.onUpdate} />
                 <Breweries data={this.state.breweries} />
@@ -98,5 +98,5 @@ var BeerNear = React.createClass({
 
 render(
     <BeerNear url="http://media.dhb.io/data/beer-near.json" />,
-    document.querySelector('.container')
+    document.querySelector('.beernear--container')
 );

@@ -4,7 +4,7 @@ $lightgreen: #00AD83;
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic);
 @import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css);
 
-.BeerNear {
+#BeerNear {
     font-family: 'Didact Gothic', Verdana, sans-serif;
     font-size: 16px;
     line-height: 1.4;
@@ -139,8 +139,8 @@ $lightgreen: #00AD83;
         .breweries--tagline {
             margin: 0 0 20px 0;
             padding: 0;
-            font-size: 14px;
-            line-height: 1.2;
+            font-size: 16px;
+            line-height: 1.3;
             color: #777;
             .fa {
                 display: none;
@@ -235,6 +235,13 @@ $lightgreen: #00AD83;
                     .brewery--list {
                         margin: 0;
                         padding: 0 0 0 30px;
+
+                        li {
+                            font-size: 16px;
+                            line-height: 1.2;
+                            padding: 0;
+                            margin: 0;
+                        }
                     }
                 }
                 .brewery--item:last-child {
@@ -399,6 +406,7 @@ $lightgreen: #00AD83;
             padding-top: 49px;
 
             .breweries--tagline {
+                font-size: 14px;
                 line-height: 14px;
                 .fa {
                     display: inline-block;
@@ -412,7 +420,7 @@ $lightgreen: #00AD83;
                 }
                 .tagline--more.tagline--show {
                     display: inline;
-
+                    line-height: 16px;
                 }
             }
             .beernear--brewery {
@@ -451,6 +459,10 @@ $lightgreen: #00AD83;
                             margin: 0;
                             padding: 0;
                             li {
+                                margin: 0;
+                                padding: 0;
+                                font-size: 14px;
+                                line-height: 1.2;
                                 display: inline;
                                 .fa-li {
                                     position: initial;

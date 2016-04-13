@@ -56,9 +56,9 @@ var LinkedAddress = React.createClass({
             var url = urlRoot + encodeURI(this.props.address.replace(/\s/g, '+'));
             var firstComma = this.props.address.lastIndexOf(",");
             var secondComma = this.props.address.lastIndexOf(",",(firstComma-1));
-            var before = this.props.address.substring(0,(firstComma+1));
+            var before = this.props.address.substring(0,(secondComma+1));
             var city = this.props.address.substring((secondComma+1),firstComma);
-            var after = this.props.address.substring(secondComma,(this.props.address.length-1));
+            var after = this.props.address.substring(firstComma,(this.props.address.length-1));
             var addressNode = (
                 <span>
                     <span className="mobile--hidden">{before}</span>{city}<span className="mobile--hidden">{after}</span>
