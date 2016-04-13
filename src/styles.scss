@@ -260,7 +260,7 @@ $lightgreen: #00AD83;
 }
 
 @media screen and (max-width: 800px) {
-    .BeerNear {
+    #BeerNear {
         font-size: 14px;
 
         .beernear--filters {
@@ -306,7 +306,7 @@ $lightgreen: #00AD83;
 }
 
 @media screen and (max-width: 560px) {
-    .BeerNear {
+    #BeerNear {
         .beernear--menu {
             display: block;
             position: fixed;
