@@ -1,7 +1,7 @@
 import React from 'react';
-import ClickableMap from './Filter-Map.jsx';
-import Dropdown from './Filter-Dropdown.jsx';
-import Check from './Filter-Checkbox.jsx';
+import ClickableMap from './Filter.Map.jsx';
+import Dropdown from './Filter.Dropdown.jsx';
+import Check from './Filter.Checkbox.jsx';
 
 var Filters = React.createClass({
     getInitialState: function() {

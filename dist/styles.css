@@ -130,8 +130,7 @@
       box-shadow: 5px 5px 5px #ccc;
       overflow-y: auto; }
       #BeerNear .beernear--breweries .beernear--brewery .brewery--inner {
-        margin: 10px;
-        overflow-y: auto; }
+        margin: 10px; }
         #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--name {
           width: 100%;
           margin: 0;
@@ -158,26 +157,35 @@
             color: #ccc; }
         #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--details {
           float: left;
-          width: 35%; }
-        #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--description {
-          float: left;
-          width: 50%; }
+          width: 85%; }
+          #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--details .details--list {
+            float: left;
+            width: 45%;
+            margin-right: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding: 0; }
+          #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--details .details--list:nth-child(2n) {
+            float: right; }
         #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item {
-          margin: 15px 10px 0 10px; }
+          margin: 15px 10px 0 0; }
           #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item .brewery--link {
             color: inherit;
             text-decoration: none; }
           #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item .brewery--link:hover {
             color: #264896;
             text-decoration: underline; }
-          #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item .brewery--list {
-            margin: 0;
-            padding: 0 0 0 30px; }
-            #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item .brewery--list li {
+          #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item .details--list {
+            width: initial !important;
+            margin: -15px 0 0 0px;
+            padding: 0; }
+            #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item .details--list .brewery--item {
               font-size: 16px;
               line-height: 1.2;
               padding: 0;
-              margin: 0; }
+              margin: 15px 10px 0 0; }
+            #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item .details--list .brewery--item:last-child {
+              margin-bottom: 15px; }
         #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item:last-child {
           margin-bottom: 15px; }
       #BeerNear .beernear--breweries .beernear--brewery .mobile--info {
@@ -185,6 +193,14 @@
   #BeerNear i.fa {
     font-size: 18px;
     color: #333; }
+
+@media screen and (max-width: 1200px) {
+  #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--details .details--list {
+    width: 43%; } }
+
+@media screen and (max-width: 960px) {
+  #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--details .details--list {
+    width: 42%; } }
 
 @media screen and (max-width: 800px) {
   #BeerNear {
@@ -213,9 +229,11 @@
         font-size: 18px; }
     #BeerNear .beernear--breweries {
       width: 100%;
-      float: none; } }
+      float: none; }
+      #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--details .details--list {
+        width: 41%; } }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 620px) {
   #BeerNear .beernear--menu {
     display: block;
     position: fixed;
@@ -307,6 +325,19 @@
       #BeerNear .beernear--breweries .breweries--tagline .tagline--more.tagline--show {
         display: inline;
         line-height: 16px; }
+    #BeerNear .beernear--breweries .beernear--brewery {
+      position: relative; }
+      #BeerNear .beernear--breweries .beernear--brewery .mobile--info {
+        display: inline-block;
+        position: absolute;
+        right: 8px;
+        bottom: 1px;
+        font-size: 12px; }
+        #BeerNear .beernear--breweries .beernear--brewery .mobile--info .fa {
+          font-size: inherit;
+          position: relative;
+          top: 1px;
+          padding-left: 2px; }
     #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--name {
       width: 70%;
       float: right;
@@ -317,42 +348,15 @@
       #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--logo .brewery--image {
         margin: 5px 0; }
     #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--details {
-      display: inline-block;
+      display: none;
       float: none;
-      width: initial;
-      margin-left: 8px;
-      margin-top: 5px; }
-    #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--description {
-      display: inline-block;
-      float: none;
-      width: initial;
-      margin-top: 5px; }
-    #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item {
-      display: inline;
-      margin: 0; }
-      #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item .fa-ul {
-        display: inline;
-        margin: 0;
-        padding: 0; }
-        #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item .fa-ul li {
-          margin: 0;
-          padding: 0;
-          font-size: 14px;
-          line-height: 1.2;
-          display: inline; }
-          #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item .fa-ul li .fa-li {
-            position: initial;
-            width: initial;
-            padding-left: 15px; }
-          #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item .fa-ul li .fa-map-marker {
-            padding-left: 0;
-            padding-right: 5px; }
-    #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--item:last-child {
-      margin: 0; }
-    #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .mobile--hidden {
-      display: none; }
-    #BeerNear .beernear--breweries .beernear--brewery .mobile-info {
-      display: inline-block; }
+      width: initial; }
+      #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--details .details--list {
+        width: initial; }
+      #BeerNear .beernear--breweries .beernear--brewery .brewery--inner .brewery--details .brewery--item:last-child {
+        margin-bottom: 0; }
+    #BeerNear .beernear--breweries .mobile--show .brewery--inner .brewery--details {
+      display: block; }
   #BeerNear i.fa {
     font-size: 16px; } }
 

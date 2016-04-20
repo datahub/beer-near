@@ -21833,7 +21833,7 @@
 	                    { className: this.state.classes },
 	                    _react2.default.createElement('br', { className: 'tagline--break' }),
 	                    _react2.default.createElement('br', null),
-	                    'Beer is a part of the Wisconsin heritage just like cheese and the Packers.',
+	                    'Beer is a part of Wisconsin\'s heritage just like cheese and the Packers.',
 	                    _react2.default.createElement('br', null),
 	                    _react2.default.createElement('br', null),
 	                    'Beer Near, a guide to the state\'s breweries and brewpubs, will help you navigate that legacy.',
@@ -21896,7 +21896,7 @@
 	            if (this.props.tours.toString() === "true") {
 	                var tour = _react2.default.createElement(
 	                    "li",
-	                    null,
+	                    { className: "brewery--item" },
 	                    _react2.default.createElement("i", { className: "fa-li fa fa-map-signs", ariaHidden: "true" }),
 	                    _react2.default.createElement(
 	                        "span",
@@ -21907,7 +21907,7 @@
 	            } else {
 	                var tour = _react2.default.createElement(
 	                    "li",
-	                    null,
+	                    { className: "brewery--item" },
 	                    _react2.default.createElement("i", { className: "fa-li fa fa-map-signs", ariaHidden: "true" }),
 	                    _react2.default.createElement(
 	                        "span",
@@ -21921,7 +21921,7 @@
 	            if (this.props.food.toString() === "true") {
 	                var food = _react2.default.createElement(
 	                    "li",
-	                    null,
+	                    { className: "brewery--item" },
 	                    _react2.default.createElement("i", { className: "fa-li fa fa-cutlery", ariaHidden: "true" }),
 	                    _react2.default.createElement(
 	                        "span",
@@ -21932,7 +21932,7 @@
 	            } else {
 	                var food = _react2.default.createElement(
 	                    "li",
-	                    null,
+	                    { className: "brewery--item" },
 	                    _react2.default.createElement("i", { className: "fa-li fa fa-cutlery", ariaHidden: "true" }),
 	                    _react2.default.createElement(
 	                        "span",
@@ -21944,11 +21944,11 @@
 	        }
 	        if (food || tour) {
 	            return _react2.default.createElement(
-	                "div",
+	                "li",
 	                { className: "brewery--item" },
 	                _react2.default.createElement(
 	                    "ul",
-	                    { className: "fa-ul brewery--list" },
+	                    { className: "fa-ul details--list" },
 	                    tour,
 	                    food
 	                )
@@ -22007,21 +22007,13 @@
 	                )
 	            );
 	            return _react2.default.createElement(
-	                "div",
+	                "li",
 	                { className: "brewery--item" },
+	                _react2.default.createElement("i", { className: "fa fa-li fa-map-marker", ariaHidden: "true" }),
 	                _react2.default.createElement(
-	                    "ul",
-	                    { className: "fa-ul brewery--list" },
-	                    _react2.default.createElement(
-	                        "li",
-	                        null,
-	                        _react2.default.createElement("i", { className: "fa fa-li fa-map-marker", ariaHidden: "true" }),
-	                        _react2.default.createElement(
-	                            "a",
-	                            { className: "brewery--link", href: url, target: "_blank" },
-	                            addressNode
-	                        )
-	                    )
+	                    "a",
+	                    { className: "brewery--link", href: url, target: "_blank" },
+	                    addressNode
 	                )
 	            );
 	        } else {
@@ -22036,18 +22028,10 @@
 	    render: function render() {
 	        if (this.props.taproom && this.props.hours) {
 	            return _react2.default.createElement(
-	                "div",
-	                { className: "brewery--item mobile--hidden" },
-	                _react2.default.createElement(
-	                    "ul",
-	                    { className: "fa-ul brewery--list" },
-	                    _react2.default.createElement(
-	                        "li",
-	                        null,
-	                        _react2.default.createElement("i", { className: "fa fa-li fa-clock-o", ariaHidden: "true" }),
-	                        this.props.hours
-	                    )
-	                )
+	                "li",
+	                { className: "brewery--item" },
+	                _react2.default.createElement("i", { className: "fa fa-li fa-clock-o", ariaHidden: "true" }),
+	                this.props.hours
 	            );
 	        } else {
 	            return null;
@@ -22061,18 +22045,10 @@
 	    render: function render() {
 	        if (this.props.desc) {
 	            return _react2.default.createElement(
-	                "div",
-	                { className: "brewery--item mobile--hidden" },
-	                _react2.default.createElement(
-	                    "ul",
-	                    { className: "fa-ul brewery--list" },
-	                    _react2.default.createElement(
-	                        "li",
-	                        null,
-	                        _react2.default.createElement("i", { className: "fa fa-li fa-info-circle", ariaHidden: "true" }),
-	                        this.props.desc
-	                    )
-	                )
+	                "li",
+	                { className: "brewery--item" },
+	                _react2.default.createElement("i", { className: "fa fa-li fa-info-circle", ariaHidden: "true" }),
+	                this.props.desc
 	            );
 	        } else {
 	            return null;
@@ -22094,28 +22070,20 @@
 	        if (this.props.number) {
 	            var number = this.formatPhoneNumber(this.props.number);
 	            return _react2.default.createElement(
-	                "div",
+	                "li",
 	                { className: "brewery--item" },
 	                _react2.default.createElement(
-	                    "ul",
-	                    { className: "fa-ul brewery--list" },
+	                    "a",
+	                    { className: "brewery--link", href: "tel:" + number },
+	                    _react2.default.createElement("i", { className: "fa fa-li fa-phone", ariaHidden: "true" })
+	                ),
+	                _react2.default.createElement(
+	                    "a",
+	                    { className: "brewery--link", href: "tel:" + number },
 	                    _react2.default.createElement(
-	                        "li",
-	                        null,
-	                        _react2.default.createElement(
-	                            "a",
-	                            { className: "brewery--link", href: "tel:" + number },
-	                            _react2.default.createElement("i", { className: "fa fa-li fa-phone", ariaHidden: "true" })
-	                        ),
-	                        _react2.default.createElement(
-	                            "a",
-	                            { className: "brewery--link", href: "tel:" + number },
-	                            _react2.default.createElement(
-	                                "span",
-	                                { className: "mobile--hidden" },
-	                                this.props.number
-	                            )
-	                        )
+	                        "span",
+	                        { className: "mobile--hidden" },
+	                        this.props.number
 	                    )
 	                )
 	            );
@@ -22136,28 +22104,20 @@
 	                displayLink = "Facebook";
 	            }
 	            return _react2.default.createElement(
-	                "div",
-	                { className: "brewery--item", style: linkStyle },
+	                "li",
+	                { className: "brewery--item" },
 	                _react2.default.createElement(
-	                    "ul",
-	                    { className: "fa-ul brewery--list" },
+	                    "a",
+	                    { className: "brewery--link", href: "http://www." + this.props.url, target: "_blank" },
+	                    _react2.default.createElement("i", { className: "fa fa-li fa-link", ariaHidden: "true" })
+	                ),
+	                _react2.default.createElement(
+	                    "a",
+	                    { className: "brewery--link", href: "http://www." + this.props.url, target: "_blank" },
 	                    _react2.default.createElement(
-	                        "li",
-	                        null,
-	                        _react2.default.createElement(
-	                            "a",
-	                            { className: "brewery--link", href: "http://www." + this.props.url, target: "_blank" },
-	                            _react2.default.createElement("i", { className: "fa fa-li fa-link", ariaHidden: "true" })
-	                        ),
-	                        _react2.default.createElement(
-	                            "a",
-	                            { className: "brewery--link", href: "http://www." + this.props.url, target: "_blank" },
-	                            _react2.default.createElement(
-	                                "span",
-	                                { className: "mobile--hidden" },
-	                                displayLink
-	                            )
-	                        )
+	                        "span",
+	                        { className: "mobile--hidden", style: linkStyle },
+	                        displayLink
 	                    )
 	                )
 	            );
@@ -22173,18 +22133,10 @@
 	    render: function render() {
 	        if (this.props.breweryType) {
 	            return _react2.default.createElement(
-	                "div",
-	                { className: "brewery--item mobile--hidden" },
-	                _react2.default.createElement(
-	                    "ul",
-	                    { className: "fa-ul brewery--list" },
-	                    _react2.default.createElement(
-	                        "li",
-	                        null,
-	                        _react2.default.createElement("i", { className: "fa fa-li fa-beer", ariaHidden: "true" }),
-	                        this.props.breweryType
-	                    )
-	                )
+	                "li",
+	                { className: "brewery--item" },
+	                _react2.default.createElement("i", { className: "fa fa-li fa-beer", ariaHidden: "true" }),
+	                this.props.breweryType
 	            );
 	        } else {
 	            return null;
@@ -22200,7 +22152,7 @@
 	    },
 	    handleClick: function handleClick() {
 	        if (this.state.classes === "beernear--brewery") {
-	            this.setState({ classes: "beernear--brewery brewery--show" });
+	            this.setState({ classes: "beernear--brewery mobile--show" });
 	        } else {
 	            this.setState({ classes: "beernear--brewery" });
 	        }
@@ -22222,19 +22174,28 @@
 	                _react2.default.createElement(
 	                    "div",
 	                    { className: "brewery--details" },
-	                    _react2.default.createElement(BreweryType, { breweryType: brewery.type }),
-	                    _react2.default.createElement(LinkedAddress, { address: brewery.location }),
-	                    _react2.default.createElement(Phone, { number: brewery.phone }),
-	                    _react2.default.createElement(Website, { url: brewery.websiteUrl })
-	                ),
-	                _react2.default.createElement(
-	                    "div",
-	                    { className: "brewery--description" },
-	                    _react2.default.createElement(Description, { desc: brewery.description }),
-	                    _react2.default.createElement(Taproom, { taproom: brewery.taproom, hours: brewery.taproomHours }),
-	                    _react2.default.createElement(Features, { food: brewery.food, tours: brewery.tours, tourInfo: brewery.tourInfo })
-	                ),
-	                _react2.default.createElement("i", { className: "fa fa-li fa-info-circle mobile--info", ariaHidden: "true", onClick: this.handleClick })
+	                    _react2.default.createElement(
+	                        "ul",
+	                        { className: "fa-ul details--list" },
+	                        _react2.default.createElement(BreweryType, { breweryType: brewery.type }),
+	                        _react2.default.createElement(LinkedAddress, { address: brewery.location }),
+	                        _react2.default.createElement(Phone, { number: brewery.phone }),
+	                        _react2.default.createElement(Website, { url: brewery.websiteUrl })
+	                    ),
+	                    _react2.default.createElement(
+	                        "ul",
+	                        { className: "fa-ul details--list" },
+	                        _react2.default.createElement(Description, { desc: brewery.description }),
+	                        _react2.default.createElement(Taproom, { taproom: brewery.taproom, hours: brewery.taproomHours }),
+	                        _react2.default.createElement(Features, { food: brewery.food, tours: brewery.tours, tourInfo: brewery.tourInfo })
+	                    )
+	                )
+	            ),
+	            _react2.default.createElement(
+	                "span",
+	                { className: "mobile--info", onClick: this.handleClick },
+	                "more",
+	                _react2.default.createElement("i", { className: "fa fa-caret-down", ariaHidden: "true" })
 	            )
 	        );
 	    }

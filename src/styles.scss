@@ -180,7 +180,6 @@ $lightgreen: #00AD83;
 
             .brewery--inner {
                 margin: 10px;
-                overflow-y: auto;
 
                 .brewery--name {
                     width: 100%;
@@ -215,14 +214,21 @@ $lightgreen: #00AD83;
                 }
                 .brewery--details {
                     float: left;
-                    width: 35%;
-                }
-                .brewery--description {
-                    float: left;
-                    width: 50%;
+                    width: 85%;
+                    .details--list {
+                        float: left;
+                        width: 45%;
+                        margin-right: 0;
+                        margin-top: 0;
+                        margin-bottom: 0;
+                        padding: 0;
+                    }
+                    .details--list:nth-child(2n){
+                        float: right;
+                    }
                 }
                 .brewery--item {
-                    margin: 15px 10px 0 10px;
+                    margin: 15px 10px 0 0;
 
                     .brewery--link {
                         color: inherit;
@@ -232,15 +238,19 @@ $lightgreen: #00AD83;
                         color: #264896;
                         text-decoration: underline;
                     }
-                    .brewery--list {
-                        margin: 0;
-                        padding: 0 0 0 30px;
+                    .details--list {
+                        width: initial !important;
+                        margin: -15px 0 0 0px;
+                        padding: 0;
 
-                        li {
+                        .brewery--item {
                             font-size: 16px;
                             line-height: 1.2;
                             padding: 0;
-                            margin: 0;
+                            margin: 15px 10px 0 0;
+                        }
+                        .brewery--item:last-child {
+                            margin-bottom: 15px;
                         }
                     }
                 }
@@ -259,6 +269,36 @@ $lightgreen: #00AD83;
     }
 }
 
+@media screen and (max-width: 1200px) {
+    #BeerNear {
+        .beernear--breweries {
+            .beernear--brewery {
+                .brewery--inner {
+                    .brewery--details {
+                        .details--list {
+                            width: 43%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 960px) {
+    #BeerNear {
+        .beernear--breweries {
+            .beernear--brewery {
+                .brewery--inner {
+                    .brewery--details {
+                        .details--list {
+                            width: 42%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 @media screen and (max-width: 800px) {
     #BeerNear {
         font-size: 14px;
@@ -300,12 +340,20 @@ $lightgreen: #00AD83;
         .beernear--breweries {
             width: 100%;
             float: none;
+            .beernear--brewery {
+                .brewery--inner {
+                    .brewery--details {
+                        .details--list {
+                            width: 41%;
+                        }
+                    }
+                }
+            }
         }
-
     }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 620px) {
     #BeerNear {
         .beernear--menu {
             display: block;
@@ -424,6 +472,23 @@ $lightgreen: #00AD83;
                 }
             }
             .beernear--brewery {
+                position: relative;
+                .mobile--info {
+                    display: inline-block;
+                    position: absolute;
+                    right: 8px;
+                    bottom: 1px;
+                    font-size: 12px;
+
+                    .fa {
+                        font-size: inherit;
+                        position:relative;
+                        top: 1px;
+                        padding-left: 2px;
+                    }
+                }
+            }
+            .beernear--brewery {
                 .brewery--inner {
                     .brewery--name {
                         width: 70%;
@@ -439,52 +504,24 @@ $lightgreen: #00AD83;
                         }
                     }
                     .brewery--details {
-                        display: inline-block;
+                        display: none;
                         float: none;
                         width: initial;
-                        margin-left: 8px;
-                        margin-top: 5px;
-                    }
-                    .brewery--description {
-                        display: inline-block;
-                        float: none;
-                        width: initial;
-                        margin-top: 5px;
-                    }
-                    .brewery--item {
-                        display: inline;
-                        margin: 0;
-                        .fa-ul {
-                            display: inline;
-                            margin: 0;
-                            padding: 0;
-                            li {
-                                margin: 0;
-                                padding: 0;
-                                font-size: 14px;
-                                line-height: 1.2;
-                                display: inline;
-                                .fa-li {
-                                    position: initial;
-                                    width: initial;
-                                    padding-left: 15px;
-                                }
-                                .fa-map-marker {
-                                    padding-left: 0;
-                                    padding-right: 5px;
-                                }
-                            }
+
+                        .details--list {
+                            width: initial;
+                        }
+                        .brewery--item:last-child {
+                            margin-bottom: 0;
                         }
                     }
-                    .brewery--item:last-child {
-                        margin: 0;
-                    }
-                    .mobile--hidden {
-                        display: none;
-                    }
                 }
-                .mobile-info {
-                    display: inline-block;
+            }
+            .mobile--show {
+                .brewery--inner {
+                    .brewery--details {
+                        display: block;
+                    }
                 }
             }
         }
