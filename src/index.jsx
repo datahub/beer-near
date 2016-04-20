@@ -35,7 +35,7 @@ var BeerNear = React.createClass({
     },
     loadBreweries: function() {
         // TODO: enable offline support, needs to local storage caching
-        $.getJSON(this.props.url, function(data) {
+        $.getJSON(this.props.dataSource, function(data) {
                 var obj = JSON.parse(data);
                 this.setState({allBreweries: obj.data});
                 this.setState({breweries: obj.data});
@@ -97,6 +97,6 @@ var BeerNear = React.createClass({
 });
 
 render(
-    <BeerNear url="http://media.dhb.io/data/beer-near.json" />,
+    <BeerNear dataSource="http://media.dhb.io/data/beer-near.json" />,
     document.querySelector('.beernear--container')
 );

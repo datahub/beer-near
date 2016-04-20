@@ -5,7 +5,7 @@ module.exports = {
     output: {
         filename: "./dist/bundle.js"
     },
-    //devtool: "source-map",
+    devtool: "source-map",
     module: {
         loaders: [
             {
@@ -20,10 +20,10 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin("./dist/styles.css")
-        ,new webpack.DefinePlugin({
-            'process.env': {
-              'NODE_ENV': JSON.stringify('production')
-            }
-        })
+        //,new webpack.DefinePlugin({
+        //    'process.env': {
+        //      'NODE_ENV': JSON.stringify('production')
+        //    }
+        //})
     ]
 }

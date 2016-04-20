@@ -30,12 +30,12 @@ var Breweries = React.createClass({
                     <i className="fa fa-info-circle" onClick={this.handleClick} ariaHidden="true"></i>
                     <span className={this.state.classes}>
                         <br className="tagline--break" /><br />
-                        Beer is a part of the Wisconsin heritage. It's right up there with award-winning cheese and the Packers.<br /><br />
-                        To help you go straight to the source, we've developed this guide of the state's breweries and brewpubs.<br /><br />
-                        It's called Beer Near. Click on the map to find breweries in specific regions of the state. Click on an icon to find out if the brewery near you offers tours; if they serve food; or simply to see what hours the brewery is open.<br /><br />
-                        Breweries, particular craft breweries, are a growing and changing community. If you see a brewery that's not in this guide please let us know.<br /><br />
+                        Beer is a part of the Wisconsin heritage just like cheese and the Packers.<br /><br />
+                        Beer Near, a guide to the state's breweries and brewpubs, will help you navigate that legacy.<br /><br />
+                        Click on the map to find breweries by region. Click on an icon to find brewery hours; see if they offer tours; or even if they serve food. It&apos;s that easy. <br /><br />
+                        Breweries, particularly craft breweries, are a growing community. If you see a new brewery opened or one that closed, write <a className="tagline--link" target="_blank" href="mailto:kathy.flanigan@jrn.com&subject=BeerNear520feedback">kathy.flanigan@jrn.com</a>.<br /><br />
                         Cheers,<br />
-                    <a className="tagline--link" target="_blank" href="http://www.jsonline.com/about-us/kathy-flanigan-28293394.html">Kathy Flanigan</a>
+                        Kathy
                     </span>
                 </p>
                 <div className="breweries--results"><span className="breweries--count">{breweriesCount}</span></div>
