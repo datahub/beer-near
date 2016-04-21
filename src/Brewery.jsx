@@ -159,24 +159,71 @@ var BreweryType = React.createClass({
     }
 });
 
+var MobileBar = React.createClass({
+    render: function() {
+        var addressNode = null, foodNode = null, tourNode = null;
+        if (this.props.address) {
+            var firstComma = this.props.address.lastIndexOf(",");
+            var secondComma = this.props.address.lastIndexOf(",",(firstComma-1));
+            var city = this.props.address.substring((secondComma+1),firstComma).trim();
+            addressNode = (
+                <span className="brewery--mobilefeature">
+                    <i className="fa fa-map-marker" ariaHidden="true"></i>{city}
+                </span>
+            );
+        }
+        if (this.props.tours) {
+            tourNode = (
+                <span className="brewery--mobilefeature">
+                    <i className="fa fa-map-signs" ariaHidden="true"></i>Tours
+                </span>
+            );
+        }
+        if (this.props.food) {
+            foodNode = (
+                <span className="brewery--mobilefeature">
+                    <i className="fa fa-cutlery" ariaHidden="true"></i>Food
+                </span>
+            );
+        }
+        if (addressNode || tourNode || foodNode) {
+            return (
+                <div className="brewery--mobileicons">
+                    {addressNode}
+                    {foodNode}
+                    {tourNode}
+                </div>
+            );
+        } else {
+            return null;
+        }
+    }
+});
+
 var Brewery = React.createClass({
     getInitialState: function() {
-        return {classes: "beernear--brewery"};
+        return {
+            classes: "beernear--brewery",
+            toggleText: "more",
+        };
     },
     handleClick: function() {
         if (this.state.classes === "beernear--brewery") {
             this.setState({classes: "beernear--brewery mobile--show"});
+            this.setState({toggleText: "less"});
         } else {
             this.setState({classes: "beernear--brewery"});
+            this.setState({toggleText: "more"});
         }
     },
     render: function() {
         var brewery = this.props.data;
         return (
-            <div className={this.state.classes}>
+            <div className={this.state.classes} onClick={this.handleClick}>
                 <div className="brewery--inner">
                     <h2 className="brewery--name">{brewery.brewery}</h2>
                     <Logo logoUrl={brewery.logoUrl} />
+                    <MobileBar address={brewery.location} food={brewery.food} tours={brewery.tours}  />
                     <div className="brewery--details">
                         <ul className="fa-ul details--list">
                             <BreweryType breweryType={brewery.type} />
@@ -191,7 +238,7 @@ var Brewery = React.createClass({
                         </ul>
                     </div>
                 </div>
-                <span className="mobile--info" onClick={this.handleClick}>more<i className="fa fa-caret-down" ariaHidden="true"></i></span>
+                <span className="mobile--info">{this.state.toggleText}<i className="fa fa-caret-down" ariaHidden="true"></i></span>
             </div>
         );
     }
