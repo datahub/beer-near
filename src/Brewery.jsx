@@ -52,13 +52,14 @@ var Logo = React.createClass({
 var LinkedAddress = React.createClass({
     render: function() {
         if (this.props.address) {
+            var address = this.props.address;
             var urlRoot = "https://maps.google.com?q=";
             var url = urlRoot + encodeURI(this.props.address.replace(/\s/g, '+'));
-            var firstComma = this.props.address.lastIndexOf(",");
-            var secondComma = this.props.address.lastIndexOf(",",(firstComma-1));
-            var before = this.props.address.substring(0,(secondComma+1));
-            var city = this.props.address.substring((secondComma+1),firstComma);
-            var after = this.props.address.substring(firstComma,(this.props.address.length-1));
+            var firstComma = address.lastIndexOf(",");
+            var secondComma = address.lastIndexOf(",",(firstComma-1));
+            var before = address.substring(0,(secondComma+1));
+            var city = address.substring((secondComma+1),firstComma);
+            var after = address.substring(firstComma,address.length);
             var addressNode = (
                 <span>
                     <span className="mobile--hidden">{before}</span>{city}<span className="mobile--hidden">{after}</span>

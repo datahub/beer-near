@@ -523,9 +523,12 @@ $lightgreen: #00AD83;
                         display: block;
                         float: left;
                         margin: 5px 0 0 2%;
+                        font-size: 12px;
+
                         .brewery--mobilefeature {
                             margin-right: 10px;
                             .fa {
+                                font-size: 14px;
                                 margin-right: 3px;
                             }
                         }
@@ -557,9 +560,6 @@ $lightgreen: #00AD83;
                     transform: rotate(180deg);
                 }
             }
-        }
-        i.fa {
-            font-size: 14px;
         }
     }
 }
