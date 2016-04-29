@@ -546,6 +546,9 @@ $lightgreen: #00AD83;
                         .brewery--item:last-child {
                             margin-bottom: 0;
                         }
+                        .details--list:nth-child(2n){
+                            float: left;
+                        }
                     }
                 }
             }
