@@ -77,12 +77,47 @@ var LinkedAddress = React.createClass({
 });
 
 var Taproom = React.createClass({
+    createMarkup: function(html) {
+        return {__html: html};
+    },
     render: function() {
         if (this.props.taproom && this.props.hours) {
+            var hourString = this.props.hours.replace(/=/g,':').replace(/;\s+/g,'<br>');
             return (
                 <li className="brewery--item">
-                    <i className="fa fa-li fa-clock-o" ariaHidden="true"></i>{this.props.hours}
+                    <i className="fa fa-li fa-clock-o" ariaHidden="true"></i>
+                    <span dangerouslySetInnerHTML={this.createMarkup(hourString)}></span>
                 </li>
+            );
+        } else {
+            return null;
+        }
+    }
+});
+
+var Status = React.createClass({
+    openStatus: function(openPeriods) {
+        var daysOfTheWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        var current = new Date();
+        var currentHour = current.getHours();
+        var currentDay = daysOfTheWeek[current.getDay()];
+        var status = '';
+        if (0 < (openPeriods[currentDay][1] - currentHour) && (openPeriods[currentDay][1] - currentHour) < 2) {
+            status = ['Closing soon','status-soon'];
+        } else if (openPeriods[currentDay][0] <= currentHour && currentHour < openPeriods[currentDay][1]) {
+            status = ['Open now','status-open'];
+        } else {
+            status = ['Closed now','status-closed'];
+        }
+        return status;
+    },
+    render: function() {
+        if (this.props.taproom && this.props.hours) {
+            var s = this.openStatus(this.props.hours);
+            var sign = s[0];
+            var color = 'brewery--status '+s[1];
+            return (
+                <span className={color}>{sign}</span>
             );
         } else {
             return null;
@@ -222,6 +257,7 @@ var Brewery = React.createClass({
         return (
             <div className={this.state.classes} onClick={this.handleClick}>
                 <div className="brewery--inner">
+                    <Status taproom={brewery.taproom} hours={brewery.open}/>
                     <h2 className="brewery--name">{brewery.brewery}</h2>
                     <Logo logoUrl={brewery.logoUrl} />
                     <MobileBar address={brewery.location} food={brewery.food} tours={brewery.tours}  />

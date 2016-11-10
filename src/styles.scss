@@ -189,6 +189,25 @@ $lightgreen: #00AD83;
                 margin: 10px;
                 min-height: 75px;
 
+                .brewery--status {
+                    float: right;
+                    margin: -10px -10px 0 0;
+                    color: #fff;
+                    padding: 5px 10px 7px 10px;
+                    font-size: 14px;
+                    line-height: 1;
+                    text-transform: uppercase;
+                }
+                .status-open {
+                    background: #007622;
+                }
+                .status-soon {
+                    background: #C9A900;
+                }
+                .status-closed {
+                    background: #990000;
+                }
+
                 .brewery--name {
                     width: 100%;
                     margin:0;
@@ -505,6 +524,17 @@ $lightgreen: #00AD83;
             }
             .beernear--brewery {
                 .brewery--inner {
+
+                    margin-top: 14px;
+
+                    .brewery--status {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        margin: 0;
+                        padding: 2px 4px 2px 4px;
+                        font-size: 10px;
+                    }
                     .brewery--name {
                         width: 70%;
                         float: right;

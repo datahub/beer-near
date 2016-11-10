@@ -132,7 +132,7 @@ function exportJson() {
           val = val.replace("http://media.jrn.com/images/","");
 
         // clean up url
-    } else if (val.indexOf('http://') > -1 || val.indexOf('https://') > -1) {
+        } else if (val.indexOf('http://') > -1 || val.indexOf('https://') > -1) {
           val = val.replace("http://","").replace("https://","").replace("www.","");
 
           if (endsWith(val,"/")) {
@@ -142,11 +142,15 @@ function exportJson() {
         // capitalize type
         } else if (header[j] === "type") {
           val = val.charAt(0).toUpperCase() + val.slice(1);
-        }
 
+        // build open hours object
+        } else if (header[j] === "taproomHours" && val !== "") {
+          tempObj.open = isOpen(val);
+        }
         tempObj[header[j]] = val;
       }
     }
+    //Logger.log(tempObj.id);
     output.push(tempObj);
   }
 
@@ -222,4 +226,75 @@ function timeStamp() {
     }
   }
   return date.join("/") + " at " + time.join(":") + " " + suffix;
+}
+// creates the object used to determine if the brewery is open
+function isOpen(openString) {
+  var openPeriods = {
+        "Monday": "Closed",
+        "Tuesday": "Closed",
+        "Wednesday": "Closed",
+        "Thursday": "Closed",
+        "Friday": "Closed",
+        "Saturday": "Closed",
+        "Sunday": "Closed"
+  };
+  if (typeof openString !== 'undefined' && openString !== "") {
+    var daysOfTheWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    var shiftWeek = function(startOfWeek) {
+        var tmp = daysOfTheWeek.slice(0);
+        var shift = tmp.indexOf(startOfWeek) - 1;
+        for(var i = 0; i <= shift; i++){
+            tmp.push(tmp.shift());
+        }
+        return tmp;
+    }
+    var cleanArray = function(arr) {
+        var result = [];
+        arr = arr.filter(Boolean);
+        for (var i = 0; i < arr.length; i++) {
+            result.push(arr[i].trim());
+        }
+        return result;
+    }
+    var milTime = function(hour,nextDayCheck) {
+      if (typeof hour !== 'undefined') {
+        if (hour.indexOf(":") > -1) {
+            var min = (parseInt(hour.substring((hour.indexOf(":")+1),(hour.indexOf(":")+3)),10) / 60);
+        } else {
+            var min = 0;
+        }
+        if (hour.indexOf("p.m.") > -1) {
+            var hr = parseInt(hour,10) + 12;
+        } else if (nextDayCheck) {
+            var hr = parseInt(hour,10) + 24;
+        } else {
+            var hr = parseInt(hour,10);
+        }
+        return (hr + min);
+      } else {
+        return 0;
+      }
+    }
+    var normalizedOpenString = openString.replace(/midnight/ig,'12 a.m.').replace(/noon/ig,'12 p.m.').replace(/open/ig,'-12 a.m.');
+    var dayStrings = normalizedOpenString.split(";");
+    for (var i = 0; i < dayStrings.length; i++) {
+        var dayString = dayStrings[i];
+        var days = dayString.split("=")[0];
+        var dayRange = cleanArray(days.split("-"));
+        var hours = dayString.split("=")[1];
+        var hourRange = cleanArray(hours.split("-"));
+        var times = [milTime(hourRange[0], false),milTime(hourRange[1], true)];
+
+        if (dayRange.length === 1) {
+            openPeriods[dayRange[0]] = times;
+        } else {
+            var week = shiftWeek(dayRange[0]);
+            var endDay = week.indexOf(dayRange[1]);
+            for (var j = 0; j <= endDay; j++) {
+                openPeriods[week[j]] = times;
+            }
+        }
+    }
+  }
+  return openPeriods;
 }
