@@ -36,7 +36,7 @@ var Logo = React.createClass({
         if (this.props.logoUrl) {
             return (
                 <div className="brewery--logo">
-                    <img className="brewery--image" src={"http://media.jrn.com/images/"+this.props.logoUrl} />
+                    <img className="brewery--image" src={this.props.logoUrl} />
                 </div>
             );
         } else {

@@ -126,13 +126,9 @@ function exportJson() {
         //normalize no to false
         } else if (val.toUpperCase() === "NO") {
           val = false;
-
-        //shorten image urls
-        } else if (val.indexOf('http://media.jrn.com/images/')  > -1) {
-          val = val.replace("http://media.jrn.com/images/","");
-
+          
         // clean up url
-        } else if (val.indexOf('http://') > -1 || val.indexOf('https://') > -1) {
+        } else if (header[j] === "websiteUrl") {
           val = val.replace("http://","").replace("https://","").replace("www.","");
 
           if (endsWith(val,"/")) {
@@ -142,7 +138,7 @@ function exportJson() {
         // capitalize type
         } else if (header[j] === "type") {
           val = val.charAt(0).toUpperCase() + val.slice(1);
-
+          
         // build open hours object
         } else if (header[j] === "taproomHours" && val !== "") {
           tempObj.open = isOpen(val);
@@ -238,7 +234,7 @@ function isOpen(openString) {
         "Saturday": "Closed",
         "Sunday": "Closed"
   };
-  if (typeof openString !== 'undefined' && openString !== "") {
+  if (typeof openString !== 'undefined' && openString !== "") {  
     var daysOfTheWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     var shiftWeek = function(startOfWeek) {
         var tmp = daysOfTheWeek.slice(0);
