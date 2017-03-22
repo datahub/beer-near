@@ -12,7 +12,7 @@ var Menu = React.createClass({
         return (
             <div className="beernear--menu">
                 <a href="http://www.jsonline.com/entertainment">
-                    <img className="menu--logo" src="http://media.jrn.com/designimages/tap-graytag-500w.png" />
+                    <img className="menu--logo" src="media/tap-graytag-500w.png" />
                 </a>
                 <div className="menu--right" onClick={this.handleClick}>
                     <i className="fa fa-sliders menu--filters" ariaHidden="true"></i>
