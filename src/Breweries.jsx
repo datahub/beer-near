@@ -25,7 +25,7 @@ var Breweries = React.createClass({
         }
         return (
             <div className="beernear--breweries">
-                <img className="header--logo" src="http://media.jrn.com/designimages/tap_beernear.png" />
+                <img className="header--logo" src="media/tap_beernear.png" />
                 <div className="breweries--header">Beer Near</div>
                 <p className="breweries--tagline">A guide to Wisconsin breweries
                     <i className="fa fa-info-circle" onClick={this.handleClick} ariaHidden="true"></i>
