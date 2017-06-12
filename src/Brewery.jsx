@@ -3,11 +3,7 @@ import React from 'react';
 var Features = React.createClass({
     render: function() {
         if (this.props.tours) {
-            if (this.props.tours.toString() === "true") {
-                var tour = <li className="brewery--item"><i className="fa-li fa fa-map-signs" ariaHidden="true"></i><span className="mobile--hidden">Tours available</span></li>;
-            } else {
-                var tour = <li className="brewery--item"><i className="fa-li fa fa-map-signs" ariaHidden="true"></i><span className="mobile--hidden">{this.props.tourInfo}</span></li>;
-            }
+            var tour = <li className="brewery--item"><i className="fa-li fa fa-map-signs" ariaHidden="true"></i><span className="mobile--hidden">{this.props.tourInfo}</span></li>;
         }
         if (this.props.food) {
             if (this.props.food.toString() === "true") {
