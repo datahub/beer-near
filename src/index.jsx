@@ -97,6 +97,6 @@ var BeerNear = React.createClass({
 });
 
 render(
-    <BeerNear dataSource="https://projects.jsonline.com/apps/BeerNear/data/beer-near.json" />,
+    <BeerNear dataSource="data/beer-near.json" />,
     document.querySelector('.beernear--container')
 );
