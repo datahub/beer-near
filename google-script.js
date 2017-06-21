@@ -110,6 +110,9 @@ function exportJson() {
   var id = 1;
 
   var header = values[0];
+  
+  var success = true;
+  
   for (var i = 1; i < numRows; i++) {
     var row = values[i];
     var tempObj = {};
@@ -141,7 +144,14 @@ function exportJson() {
           
         // build open hours object
         } else if (header[j] === "taproomHours" && val !== "") {
-          tempObj.open = isOpen(val);
+          try {
+            tempObj.open = isOpen(val);
+          } catch(e) {
+            success = false;
+            SpreadsheetApp.getUi().alert('Error parsing: ' + val);
+            SpreadsheetApp.getUi().alert('Error: ' + e);
+          }
+          
         }
         tempObj[header[j]] = val;
       }
@@ -158,11 +168,15 @@ function exportJson() {
   };
 
   var finalJSON = JSON.stringify(final);
+  
+  if (success) {
+    //Logger.log(finalJSON);
+    saveToS3(finalJSON);
+  } else {
+    SpreadsheetApp.getUi().alert('The spreadsheet was not published due to an error. Double check all values recently added. See the app script logs for more details');
+  }
 
-  //Logger.log(finalJSON);
-  saveToS3(finalJSON);
-
-  createVersion();
+  //createVersion();
 
 }
 
@@ -202,9 +216,10 @@ function limitSheets() {
   var sheets = ss.getSheets();
 
   if (sheets.length > maxSheetCount) {
-    for(var i = (maxSheetCount - 1); i < sheets.length; i++){
-      var s = sheets[i];
-      ss.deleteSheet(s);
+    for(var i = maxSheetCount; i < sheets.length; i++){
+      if (i !== 0) {
+        ss.deleteSheet(sheets[i]);
+      }
     }
   }
 }
