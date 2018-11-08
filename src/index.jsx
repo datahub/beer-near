@@ -1,11 +1,11 @@
-require('./styles.scss');
-
 import $ from "jquery";
 import React from 'react';
 import {render} from 'react-dom';
-import Breweries from './Breweries.jsx';
-import Filters from './Filters.jsx';
-import Menu from './Menu.jsx';
+import Breweries from './components/Breweries.jsx';
+import Filters from './components/Filters.jsx';
+import Menu from './components/Menu.jsx';
+
+import './index.scss';
 
 var BeerNear = React.createClass({
     getInitialState: function() {

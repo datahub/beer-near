@@ -3,6 +3,14 @@ $lightgreen: #00AD83;
 
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic);
 
+.beernear--container {overflow-y: auto; width: 100%; max-width: 1100px; margin: 0 auto;}
+#BeerNear .beernear--breweries .breweries--results .breweries--count {top: -13px;}
+
+@media screen and (max-width: 560px) {
+    .navbar {display: none;}
+    #jsonline-header {display: none;}
+}
+
 #BeerNear {
     font-family: 'Didact Gothic', Verdana, sans-serif;
     font-size: 16px;
@@ -30,7 +38,7 @@ $lightgreen: #00AD83;
                 height: auto;
 
                 .filter--region {
-                    transition: fill .3s ease-out;
+                    transition: fill 0.3s ease-out;
                 }
 
                 .filter--region:hover {
@@ -63,7 +71,7 @@ $lightgreen: #00AD83;
             }
             .beernear--label {
                 display: block;
-                margin:0 0 10px 0;
+                margin: 0 0 10px 0;
                 font-size: 18px;
                 font-weight: bold;
                 text-transform: uppercase;
@@ -71,7 +79,7 @@ $lightgreen: #00AD83;
             .beernear--checkbox {
                 display: inline-block;
                 margin: 0;
-                padding:0 6px 0 1px;
+                padding: 0 6px 0 1px;
                 outline: none;
                 background: #fff;
                 border: 0;
@@ -83,14 +91,14 @@ $lightgreen: #00AD83;
                 position: relative;
                 top: 2px;
                 padding-right: 3px;
-                content: "\f096";
+                content: '\f096';
                 font-size: 22px;
-                font-family: FontAwesome;
+                font-family: FontAwesome, sans-serif;
                 background: #fff;
             }
             .beernear--checkbox:checked:before {
                 padding-right: 0;
-                content: "\f046";
+                content: '\f046';
             }
         }
         .filters--header {
@@ -209,8 +217,8 @@ $lightgreen: #00AD83;
 
                 .brewery--name {
                     width: 100%;
-                    margin:0;
-                    padding:0 0 5px 0;
+                    margin: 0;
+                    padding: 0 0 5px 0;
                     color: #444;
                     font-size: 30px;
                     line-height: 1.3;
@@ -252,7 +260,7 @@ $lightgreen: #00AD83;
                         margin-bottom: 0;
                         padding: 0;
                     }
-                    .details--list:nth-child(2n){
+                    .details--list:nth-child(2n) {
                         float: right;
                     }
                 }
@@ -268,19 +276,20 @@ $lightgreen: #00AD83;
                         text-decoration: underline;
                     }
                     .details--list {
-                        width: initial !important;
+                        width: initial !important; /* stylelint-disable-line */
                         margin: -15px 0 0 0px;
                         padding: 0;
+                    }
 
-                        .brewery--item {
-                            font-size: 16px;
-                            line-height: 1.2;
-                            padding: 0;
-                            margin: 15px 10px 0 0;
-                        }
-                        .brewery--item:last-child {
-                            margin-bottom: 15px;
-                        }
+                    .details--list .brewery--item {
+                        font-size: 16px;
+                        line-height: 1.2;
+                        padding: 0;
+                        margin: 15px 10px 0 0;
+                    }
+
+                    .details--list .brewery--item:last-child {
+                        margin-bottom: 15px;
                     }
                 }
                 .brewery--item:last-child {
@@ -430,11 +439,11 @@ $lightgreen: #00AD83;
             left: 0;
             right: 0;
             height: 100%;
-            background: rgba(255,255,255,.96);
+            background: rgba(255,255,255,0.96);
             z-index: 1;
             padding-top: 54px;
             transform: translateY(-100%);
-            transition: transform .3s ease-in-out;
+            transition: transform 0.3s ease-in-out;
 
             .filters--header {
                 margin-bottom: 15px;
@@ -515,13 +524,12 @@ $lightgreen: #00AD83;
 
                     .fa {
                         font-size: inherit;
-                        position:relative;
+                        position: relative;
                         top: 1px;
                         margin-left: 4px;
                     }
                 }
-            }
-            .beernear--brewery {
+
                 .brewery--inner {
 
                     margin-top: 14px;
@@ -550,11 +558,9 @@ $lightgreen: #00AD83;
                     }
 
                     .brewery--item {
-                        .details--list {
-                            .brewery--item {
-                                font-size: 14px;
-                                line-height: 1.4;
-                            }
+                        .details--list .brewery--item {
+                            font-size: 14px;
+                            line-height: 1.4;
                         }
                     }
 
@@ -566,14 +572,15 @@ $lightgreen: #00AD83;
 
                         .brewery--mobilefeature {
                             margin-right: 10px;
-                            .fa {
-                                font-size: 14px;
-                                margin-right: 3px;
-                            }
+                        }
+
+                        .brewery--mobilefeature .fa {
+                            font-size: 14px;
+                            margin-right: 3px;
                         }
                     }
                     .brewery--details {
-                        /*display: none;*/
+                        /* display: none; */
                         max-height: 0;
                         overflow-y: hidden;
                         width: initial;
@@ -585,7 +592,7 @@ $lightgreen: #00AD83;
                         .brewery--item:last-child {
                             margin-bottom: 0;
                         }
-                        .details--list:nth-child(2n){
+                        .details--list:nth-child(2n) {
                             float: left;
                         }
                     }
@@ -594,7 +601,7 @@ $lightgreen: #00AD83;
             .mobile--show {
                 .brewery--inner {
                     .brewery--details {
-                        /*display: block;*/
+                        /* display: block; */
                         max-height: 100%;
                     }
                 }
