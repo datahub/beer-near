@@ -28,3 +28,5 @@ This will put the built version of the files in the `dist` folder. This folder w
 have four elements: `index.html`, `index.js` and `index.css`. It will also copy over the `data` and the `media` folders from `src`. 
 
 You won't see image for breweries when developing. The `media` folder isn't saved in this repo. If you want to view these when developing, copy over the `media` folder from the projects server into the `src` folder here.
+
+You also won't see FontAwesome icons or the JS nav either. The page pulls this from the `/shared` folder on the projects server. There is a link to the FontAwesome CDN in the `src/index.html` file that you can uncomment when developing to see the icons. Just remember to uncomment this so we aren't loading in FontAwesome twice once it's on the projects server.
