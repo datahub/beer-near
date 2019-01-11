@@ -1,10 +1,12 @@
 $green: #00865F;
 $lightgreen: #00AD83;
 
-@import url(https://fonts.googleapis.com/css?family=Didact+Gothic);
-
-.beernear--container {overflow-y: auto; width: 100%; max-width: 1100px; margin: 0 auto;}
-#BeerNear .beernear--breweries .breweries--results .breweries--count {top: -13px;}
+.beernear--container {
+    overflow-y: auto;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
 
 @media screen and (max-width: 560px) {
     .navbar {display: none;}
@@ -12,7 +14,7 @@ $lightgreen: #00AD83;
 }
 
 #BeerNear {
-    font-family: 'Didact Gothic', Verdana, sans-serif;
+    font-family: 'Unify Sans', Tahoma, sans-serif;
     font-size: 16px;
     line-height: 1.4;
     color: #222;
@@ -147,7 +149,8 @@ $lightgreen: #00AD83;
         .breweries--header {
             margin: 5px 0 0 0;
             padding: 0;
-            font-size: 22px;
+            font-size: 2.2em;
+            font-weight: 700;
             font-weight: bold;
         }
         .breweries--tagline {
@@ -180,7 +183,7 @@ $lightgreen: #00AD83;
                 font-size: 16px;
                 line-height: 16px;
                 position: relative;
-                top: -9px;
+                top: -13px;
                 background: #fff;
                 padding: 0 5px;
             }
