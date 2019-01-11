@@ -134,6 +134,55 @@ $lightgreen: #00AD83;
         }
     }
 
+    $button-color: #00AD83;
+    .find-pint {
+        text-align: center;
+        margin: 20px auto 30px auto;
+
+        button {
+            border: none;
+            font-family: 'Unify Sans', Tahoma, sans-serif;
+            font-size: 20px;
+            background: $button-color;
+            border-radius: 3px;
+            color: hsla(0, 0%, 100%, 0.95);
+            padding: 6px 10px;
+            box-shadow: 0px 2px 4px hsla(0, 0%, 0%, 0.2);
+            outline: 0;
+            cursor: pointer;
+
+            transition: 0.1s box-shadow;
+
+            i.fa {
+                color: hsla(0, 0%, 100%, 0.95);
+            }
+        }
+
+        button:active,
+        button:focus {
+            outline: 0;
+        }
+
+        button:hover {
+            box-shadow: 0px 4px 6px hsla(0, 0%, 0%, 0.2);
+        }
+
+        button.see-all-button {
+            background: none;
+            border: 2px solid $button-color;
+            font-weight: bold;
+            color: $button-color;
+            box-shadow: none;
+            i.fa {
+                color: $button-color;
+            }
+        }
+
+        button.see-all-button:hover {
+            box-shadow: none;
+        }
+    }
+
     .beernear--breweries {
         width: 73%;
         float: right;

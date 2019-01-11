@@ -2,6 +2,7 @@ import React from 'react';
 import ClickableMap from './Filter.Map.jsx';
 import Dropdown from './Filter.Dropdown.jsx';
 import Check from './Filter.Checkbox.jsx';
+import FindPint from './Filter.FindPint.jsx';
 
 var Filters = React.createClass({
     getInitialState: function() {
@@ -24,7 +25,8 @@ var Filters = React.createClass({
         var filters = this.props.filters;
         return (
             <div className={this.state.classes}>
-                <div className="filters--header">Filter Breweries</div>
+                <FindPint onUpdate={this.onUpdate}/>
+                <div className="filters--break"><span className="filters--or">OR</span></div>
                 <ClickableMap
                     name={filters.regions.name}
                     options={filters.regions.options}

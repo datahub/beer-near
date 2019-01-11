@@ -40,6 +40,8 @@
     "webpack-md5-hash": "^0.0.6"
   },
   "dependencies": {
+    "@turf/distance": "^6.0.1",
+    "@turf/helpers": "^6.1.4",
     "jquery": "^3.3.1",
     "react": "^15.0.1",
     "react-dom": "^15.0.1"

@@ -121,9 +121,12 @@ function exportJson() {
     for (var j = 0;j<numCols;j++) {
       if (row[j]) {
         var val = row[j];
-
-        // normalize yes to true
-        if (val.toUpperCase() === "YES") {
+        
+        if (header[j] === 'lat' || header[j] === 'lng') {
+          val = parseFloat(row[j]);
+        
+        // normalize yes to true    
+        } else if (val.toUpperCase() === "YES") {
           val = true;
 
         //normalize no to false
@@ -153,6 +156,7 @@ function exportJson() {
           }
           
         }
+        
         tempObj[header[j]] = val;
       }
     }
@@ -187,7 +191,7 @@ function saveToS3(blob) {
   var awsAccessKey = documentProperties.getProperty('AWS_ACCESS_KEY');
   var awsSecretKey = documentProperties.getProperty('AWS_SECRET_KEY');
   var bucket = documentProperties.getProperty('AWS_BUCKET');
-  var projectPath = documentProperties.getProperty('PROJECT_PATH') + '/beer-near.json';
+  var projectPath = documentProperties.getProperty('PROJECT_PATH') + '/beer-near-test.json';
 
   var s3 = S3.getInstance(awsAccessKey, awsSecretKey);
   s3.putObject(bucket, projectPath, blob, {logRequests:false});
