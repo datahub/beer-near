@@ -9,6 +9,16 @@ import geoDistance from '@turf/distance';
 
 import './index.scss';
 
+function getQueryVariable(url, variable) {
+       var query = url.search.substring(1);
+       var vars = query.split("&");
+       for (var i = 0; i < vars.length; i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable) {return pair[1];}
+       }
+       return false;
+}
+
 var BeerNear = React.createClass({
 
     getInitialState: function() {
@@ -42,11 +52,24 @@ var BeerNear = React.createClass({
     loadBreweries: function() {
         // TODO: enable offline support, needs to local storage caching
         $.getJSON(this.props.dataSource, function(data) {
-                var obj = JSON.parse(data);
-                this.setState({allBreweries: obj.data});
-                this.setState({breweries: obj.data});
-            }.bind(this)
-        );
+            var obj = JSON.parse(data);
+            this.setState({allBreweries: obj.data, breweries: obj.data});
+            
+            var region = getQueryVariable(window.location, 'region');
+            var city = getQueryVariable(window.location, 'city');
+
+            if (region) {
+                this.onUpdate({
+                    slug: 'regions',
+                    selected: region,
+                });
+            } else if (city) {
+                this.onUpdate({
+                    slug: 'cities',
+                    selected: city,
+                });
+            }
+        }.bind(this));
     },
 
     componentDidMount: function() {

@@ -151,7 +151,7 @@ $lightgreen: #00AD83;
             outline: 0;
             cursor: pointer;
 
-            transition: 0.1s box-shadow;
+            transition: 0.1s box-shadow, 0.1s scale;
 
             i.fa {
                 color: hsla(0, 0%, 100%, 0.95);
@@ -161,6 +161,12 @@ $lightgreen: #00AD83;
         button:active,
         button:focus {
             outline: 0;
+        }
+
+        button:active,
+        button:active:hover {
+            box-shadow: none;
+            transform: scale(0.98);
         }
 
         button:hover {
@@ -180,6 +186,30 @@ $lightgreen: #00AD83;
 
         button.see-all-button:hover {
             box-shadow: none;
+        }
+
+        .loading-message .fa {
+            color: #01865f;
+            font-size: 24px;
+        }
+
+        .error-message {
+            font-size: 14px;
+        }
+
+        .error-message .title,
+        .error-message .title .fa {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .error-message .title {
+            margin-bottom: 5px;
+        }
+
+        .error-message,
+        .error-message .fa {
+            color: #990000;
         }
     }
 
@@ -461,8 +491,8 @@ $lightgreen: #00AD83;
             .menu--logo {
                 display: inline-block;
                 width: auto;
-                height: 40px;
-                margin-top: 5px;
+                height: 60px;
+                margin-top: -5px;
             }
 
             .menu--right {
