@@ -10,26 +10,28 @@ function getLocation(success, error) {
 
 var FindPint = React.createClass({
     getInitialState: function() {
-        return {selected: false, loading: false, errored: false};
+        return {loading: false, errored: false};
     },
     handleClick: function() {
-        if (this.state.selected === false) {
+        if (!this.props.selected) {
             // When we find the user's location
             function success(position) {
-                this.setState({selected: true, loading: false});
+                this.setState({loading: false});
                 this.props.onUpdate({slug: 'findPint', selected: position.coords});
+                this.props.onUpdate({slug: 'regions', selected: false});
+                this.props.onUpdate({slug: 'cities', selected: false});
+                this.props.onDone();
             }
 
             // When we can't find the user's location
             function error() {
-                this.setState({selected: false, loading: false, errored: true});
+                this.setState({loading: false, errored: true});
                 this.props.onUpdate({slug: 'findPint', selected: false});
             }
 
             this.setState({ loading: true });
             getLocation(success.bind(this), error.bind(this));
         } else {
-            this.setState({selected: false});
             this.props.onUpdate({slug: 'findPint', selected: false});
         }
     },
@@ -68,10 +70,10 @@ var FindPint = React.createClass({
                 See all
             </button>
         );
-
+    
         return (
             <div className="find-pint">
-                {this.state.selected ? seeAllButton : findButton}
+                {this.props.selected ? seeAllButton : findButton}
             </div>
         );
     }

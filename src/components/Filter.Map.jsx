@@ -1,18 +1,15 @@
 import React from 'react';
 
 var ClickableMap = React.createClass({
-    getInitialState: function() {
-        return {selected: ""};
-    },
     handleClick: function(event) {
         var region = event.target.getAttribute('title');
-        if (region === this.state.selected) {
-            this.setState({selected: ""});
+        if (region === this.props.selected) {
             this.props.onUpdate({slug: this.props.slug, selected: ""});
+            this.props.onUpdate({slug: 'findPint', selected: false});
         } else {
-            this.setState({selected: region});
             this.props.onUpdate({slug: this.props.slug, selected: region});
             window.dispatchEvent(window.deselectDropdown);
+            this.props.onUpdate({slug: 'findPint', selected: false});
         }
     },
     componentDidMount() {
@@ -26,12 +23,11 @@ var ClickableMap = React.createClass({
         window.removeEventListener("deselectMap", this.deselectMap, false);
     },
     deselectMap: function() {
-        this.setState({selected: ""});
         this.props.onUpdate({slug: this.props.slug, selected: ""});
     },
     isSelected: function(region) {
-        var classes = ["filter--region","pointer"];
-        if (this.state.selected === region) {
+        var classes = ["filter--region", "pointer"];
+        if (this.props.selected === region) {
             classes.push("region--selected");
         }
         return classes.join(" ");

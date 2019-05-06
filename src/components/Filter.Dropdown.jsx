@@ -1,13 +1,10 @@
 import React from 'react';
 
 var Dropdown = React.createClass({
-    getInitialState: function() {
-        return {selected: ""};
-    },
     handleChange: function(event) {
-        this.setState({selected: event.target.value});
         this.props.onUpdate({slug: this.props.slug, selected: event.target.value});
         window.dispatchEvent(window.deselectMap);
+        this.props.onUpdate({slug: 'findPint', selected: false});
     },
     componentDidMount() {
         window.deselectMap = document.createEvent('Event');
@@ -35,7 +32,7 @@ var Dropdown = React.createClass({
                     name={this.props.name}
                     className="beernear--dropdown pointer"
                     onChange={this.handleChange}
-                    value={this.state.selected} >
+                    value={this.props.selected} >
                     <option value="">Nearby Cities</option>
                     {optionNodes}
                 </select>

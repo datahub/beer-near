@@ -25,37 +25,40 @@ var Filters = React.createClass({
         var filters = this.props.filters;
         return (
             <div className={this.state.classes}>
-                <FindPint onUpdate={this.onUpdate}/>
-                <div className="filters--break"><span className="filters--or">OR</span></div>
+                <FindPint selected={filters.findPint.selected} onUpdate={this.onUpdate} onDone={this.toggleFilters}/>
+                <div className="filters--break"></div>
+                <div className="beernear--filter">
+                    <Check
+                        name={filters.tapRoom.name}
+                        onUpdate={this.onUpdate}
+                        slug="tapRoom"
+                        iconClasses="fa-beer"/>
+                    <Check
+                        name={filters.food.name}
+                        onUpdate={this.onUpdate}
+                        slug="food"
+                        iconClasses="fa-cutlery" />
+                    <Check
+                        name={filters.tours.name}
+                        onUpdate={this.onUpdate}
+                        slug="tours"
+                        iconClasses="fa-map-signs" />
+                </div>
+                <div className="filters--break"></div>
                 <ClickableMap
                     name={filters.regions.name}
                     options={filters.regions.options}
                     slug="regions"
-                    onUpdate={this.onUpdate} />
+                    onUpdate={this.onUpdate} 
+                    selected={filters.regions.selected} />
                 <div className="filters--break"><span className="filters--or">OR</span></div>
                 <div className="filter--right">
                     <Dropdown
                         name={filters.cities.name}
                         options={filters.cities.options}
                         onUpdate={this.onUpdate}
-                        slug="cities" />
-                    <div className="beernear--filter">
-                        <Check
-                            name={filters.tapRoom.name}
-                            onUpdate={this.onUpdate}
-                            slug="tapRoom"
-                            iconClasses="fa-beer"/>
-                        <Check
-                            name={filters.food.name}
-                            onUpdate={this.onUpdate}
-                            slug="food"
-                            iconClasses="fa-cutlery" />
-                        <Check
-                            name={filters.tours.name}
-                            onUpdate={this.onUpdate}
-                            slug="tours"
-                            iconClasses="fa-map-signs" />
-                    </div>
+                        slug="cities" 
+                        selected={filters.cities.selected} />
                 </div>
                 <div className="filters--apply" onClick={this.toggleFilters}>
                     Apply
