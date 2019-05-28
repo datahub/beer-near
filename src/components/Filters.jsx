@@ -42,7 +42,7 @@ var Filters = React.createClass({
                         name={filters.tours.name}
                         onUpdate={this.onUpdate}
                         slug="tours"
-                        iconClasses="fa-map-signs" />
+                        iconClasses="fa-ticket" />
                 </div>
                 <div className="filters--break"></div>
                 <ClickableMap

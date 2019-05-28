@@ -3,7 +3,18 @@ import React from 'react';
 var Features = React.createClass({
     render: function() {
         if (this.props.tours) {
-            var tour = <li className="brewery--item"><i className="fa-li fa fa-map-signs" ariaHidden="true"></i><span className="mobile--hidden">{this.props.tourInfo}</span></li>;
+            let tourInfo = this.props.tourInfo;
+            if (tourInfo === undefined) {
+                tourInfo = 'Tours available';
+            } else if (tourInfo.indexOf(';') > -1 || tourInfo.indexOf('=') > -1) {
+                tourInfo = tourInfo
+                    .split(';')
+                    .map(function(d) {
+                        return <div>{d.replace('=', ':')}</div>
+                    });
+                tourInfo.unshift(<div>Tours:</div>);
+            }
+            var tour = <li className="brewery--item"><i className="fa fa-li fa-ticket" ariaHidden="true"></i><span className="mobile--hidden">{tourInfo}</span></li>;
         }
         if (this.props.food) {
             if (this.props.food.toString() === "true") {
