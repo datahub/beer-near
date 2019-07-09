@@ -33,7 +33,7 @@ var BeerNear = React.createClass({
                 },
                 cities: {
                     name: "Nearby Cities",
-                    options: ["Appleton", "Ashland", "Barron", "Eagle River", "Eau Claire", "Fond du Lac", "Green Bay", "Hayward", "La Crosse", "Lake Geneva", "Madison", "Milwaukee", "Platteville", "Prairie du Chien", "Sheboygan", "Stevens Point", "Sturgeon Bay", "Superior", "Wausau", "Wisconsin Dells"],
+                    options: ["Appleton", "Eagle River", "Eau Claire", "Fond du Lac", "Green Bay", "Hayward", "Hudson", "La Crosse", "Lake Geneva", "Madison", "Milwaukee", "Platteville", "Prairie du Chien", "Rice Lake", "Sheboygan", "Stevens Point", "Sturgeon Bay", "Superior", "Wausau", "Wisconsin Dells"],
                     selected: ""
                 },
                 tours: {name: "Tours", selected: false},
