@@ -33,9 +33,8 @@ var Breweries = React.createClass({
                         Beer is a part of Wisconsin's heritage just like cheese and the Packers.<br /><br />
                         Beer Near, a guide to the state's breweries and brewpubs, will help you navigate that legacy.<br /><br />
                         Click on the map to find breweries by region. Click on an icon to find brewery hours; see if they offer tours; or even if they serve food. It&apos;s that easy. <br /><br />
-                        Breweries, particularly craft breweries, are a growing community. If you see a new brewery opened or one that closed, write <a className="tagline--link" target="_blank" href="mailto:kathy.flanigan@jrn.com&subject=BeerNear520feedback">kathy.flanigan@jrn.com</a>.<br /><br />
-                        Cheers,<br />
-                        Kathy
+                        Breweries, particularly craft breweries, are a growing community. If you see a new brewery opened or one that closed, write <a className="tagline--link" target="_blank" href="mailto:mjs-jsfeat@gannett.com&subject=BeerNear%20feedback">mjs-jsfeat@gannett.com</a>.<br /><br />
+                        Cheers!<br />
                     </span>
                 </p>
                 <div className="breweries--results"><span className="breweries--count">{breweriesCount}</span></div>
